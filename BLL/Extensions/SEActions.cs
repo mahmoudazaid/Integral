@@ -3,6 +3,7 @@ using BLL.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -39,23 +40,26 @@ namespace BLL.Extensions
             checbox.Click();
         }
 
-        public static void DragAndDrop(By _source, By _target)
+        public static void TypeText(By textBox, string text)
         {
-            try
-            {
-                Thread.Sleep(2000);
-                Actions actionBuilder = new Actions(Driver.WebDriver);
-                Driver.WebDriver.ScrollToElement(_source, 10);
-                IWebElement source = Driver.WebDriver.InspectElement(_source);
-                IWebElement target = Driver.WebDriver.InspectElement(_target);                
-                actionBuilder.DragAndDrop(source, target).Build().Perform();                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception ******" + ex.ToString());
+            Driver.WebDriver.ScrollToElement(textBox, 10);
+            IWebElement textbox = Driver.WebDriver.InspectElement(textBox);
+            textbox.Clear();
+            textbox.SendKeys(text);
+        }
 
+        public static void SelectFromDropDown(By dropwdown, string SelectionText)
+        {
+            Driver.WebDriver.ScrollToElement(dropwdown, 10);
+            IReadOnlyCollection<IWebElement> optionsList = Driver.WebDriver.InspectElements(dropwdown);
+            foreach (var item in optionsList)
+            {
+                if (item.Text == SelectionText)
+                {
+                    item.Click();
+                    break;
+                }
             }
-
         }
     }
 }

@@ -16,15 +16,15 @@ Scenario: Validate that one single payment method is available for Lebanon count
     Then User enters username as "testuser@gm.com"
     And User enters password as "12345678"
     And User clicks on continue button
-    And User should selects Lebanon from country dropdown menu
-    Then User should see that only credit card payment method is displayed 
+    And User should selects "Lebanon" from country dropdown menu
+    Then User should see that only "Credit Card" payment method is displayed 
 
 Scenario: Validate that two payment methods are available for Bahrain country
     Then User enters username as "testuser@gm.com"
     And User enters password as "12345678"
     And User clicks on continue button
-    And User should selects Bahrain from country dropdown menu
-    Then User should see that two payment methods are displayed 
+    And User should selects "Bahrain" from country dropdown menu
+    Then User should see that 2 payment methods are displayed 
 
 Scenario: Validate user navigates back to subscribe now page 
     Then User clicks on Click here link in create your account section

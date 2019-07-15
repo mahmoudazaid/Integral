@@ -2,6 +2,71 @@
   {
     "name": "SectionTitle",
     "locator": "xpath",
+    "value": "//h2[@class='section-title']"
+  },
+  {
+    "name": "ChangeLanguage",
+    "locator": "xpath",
     "value": "//span[@class='hide-resp']"
-  }, 
+  },
+  {
+    "name": "Trial",
+    "locator": "xpath",
+    "value": "//a[contains(@class,'header__subscribe')]"
+  },
+  {
+    "name": "EmailTextbox",
+    "locator": "xpath",
+    "value": "//input[@id='email']"
+  },
+  {
+    "name": "PasswordTextbox",
+    "locator": "xpath",
+    "value": "//input[@id='password']"
+  },
+  {
+    "name": "ContinueButton",
+    "locator": "xpath",
+    "value": "//button[@class='signup-form__submit']"
+  },
+  {
+    "name": "BackButton",
+    "locator": "xpath",
+    "value": "//button[@class='signup-form__back']"
+  },
+  {
+    "name": "StepName",
+    "locator": "xpath",
+    "value": "//h4[@class='step-name']"
+  },
+  {
+    "name": "FormName",
+    "locator": "xpath",
+    "value": "//h3[@class='signup-form-terms__title']"
+  },
+  {
+    "name": "Countries",
+    "locator": "xpath",
+    "value": "//select[@name='country']/option"
+  },
+  {
+    "name": "Providers",
+    "locator": "xpath",
+    "value": "//div[@class='provider-name']"
+  },
+  {
+    "name": "ClickHere",
+    "locator": "xpath",
+    "value": "//a[contains(text(),'Click here')]"
+  },
+  {
+    "name": "Subscribe",
+    "locator": "xpath",
+    "value": "//a[text()='Subscribe']"
+  },
+  {
+    "name": "TermsConditions",
+    "locator": "xpath",
+    "value": "//p[@class='signup-form__terms']//a[contains(text(),'Terms & Conditions')]"
+  }
 ]

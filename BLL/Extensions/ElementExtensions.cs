@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace BLL.Extensions
 {
@@ -11,6 +13,11 @@ namespace BLL.Extensions
             ElementExtensions.WaitForItToBeVisible(elementLocator, 60);
             var element = driver.FindElement(elementLocator);
             return element;
+        }
+        public static ReadOnlyCollection<IWebElement> InspectElements(this IWebDriver driver, By elementLocator)
+        {
+            var elements = driver.FindElements(elementLocator);
+            return elements;
         }
 
         public static void WaitForItToBeVisible(By element, int timeOutInSeconds)

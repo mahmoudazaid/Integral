@@ -2,6 +2,7 @@
 using BLL.Browser;
 using BLL.Extensions;
 using BLL.Utilities;
+using FluentAssertions;
 using OpenQA.Selenium;
 using System;
 using System.Configuration;
@@ -16,13 +17,6 @@ namespace Web.Automation.SpecFlow
         private static string baseURL = ConfigurationManager.AppSettings["URL"];
         private readonly ParsersManager _parser = new ParsersManager("SampleTestingPageObject.json");
 
-
-        // For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
-        [Given(@"I am on Home Page")]
-        public void GivenIAmOnHomePage()
-        {
-            Driver.Visit(baseURL);
-        }
 
         [When(@"[Cc]lick on ""(.*)"" Link")]
         public void WhenClickOnLink(string link)
@@ -52,13 +46,14 @@ namespace Web.Automation.SpecFlow
             SEActions.ClickButton(_uploadButton);
         }
 
-        [Then(@"I should see ""(.*)""")]
-        public void ThenIShouldSee(string _text)
+        [Then(@"I should see ""(.*)"" on ""(.*)""")]
+        public void ThenIShouldSee(string _text,string el)
         {
-            //var _element = _parser.GetElementByName(_text);
-            //Driver.WebDriver.ScrollToElement(_element, 10);
-            //IWebElement element = Driver.WebDriver.InspectElement(_element);
-            //string elementText = element.Text;            
+            var _element = _parser.GetElementByName(el);
+            Driver.WebDriver.ScrollToElement(_element, 10);
+            IWebElement element = Driver.WebDriver.InspectElement(_element);
+            string elementText = element.Text;
+            elementText.Should().Be(_text);
         }     
 
         [Then(@"[Dd]elete ""(.*)"" file")]
@@ -72,15 +67,5 @@ namespace Web.Automation.SpecFlow
             var checkbox = _parser.GetElementByName(_checkbox);
             SEActions.SelectCheckBox(checkbox);
         }
-
-        [When(@"[Dd]rag ""(.*)"" and drop to ""(.*)""")]
-        public void WhenDragAnndDropTo(string _source, string _target)
-        {
-            var source = _parser.GetElementByName(_source);
-            var target = _parser.GetElementByName(_target);
-            SEActions.DragAndDrop(source, target);
-        }
-
-
     }
 }

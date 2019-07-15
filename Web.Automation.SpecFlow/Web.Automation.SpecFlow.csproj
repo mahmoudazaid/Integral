@@ -112,6 +112,7 @@
     <Compile Include="Hooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\SampleTestingStepDefs.cs" />
+    <Compile Include="StepDefinitions\StepDefinition1.cs" />
     <Compile Include="StepDefinitions\WebSteps.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +127,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="runtests.cmd" />
-    <None Include="specflow.json" />
     <None Include="SpecRunTestProfile.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -165,6 +165,7 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.225\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.225\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\ReportPortal.Client.2.1.13\build\ReportPortal.Client.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReportPortal.Client.2.1.13\build\ReportPortal.Client.targets'))" />
     <Error Condition="!Exists('..\packages\ReportPortal.Shared.2.3.0\build\ReportPortal.Shared.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReportPortal.Shared.2.3.0\build\ReportPortal.Shared.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.75.0.3770.140\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.75.0.3770.140\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.Firefox.WebDriver.0.24.0\build\Selenium.Firefox.WebDriver.targets" Condition="Exists('..\packages\Selenium.Firefox.WebDriver.0.24.0\build\Selenium.Firefox.WebDriver.targets')" />
@@ -174,4 +175,5 @@
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.225\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.225\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\ReportPortal.Client.2.1.13\build\ReportPortal.Client.targets" Condition="Exists('..\packages\ReportPortal.Client.2.1.13\build\ReportPortal.Client.targets')" />
   <Import Project="..\packages\ReportPortal.Shared.2.3.0\build\ReportPortal.Shared.targets" Condition="Exists('..\packages\ReportPortal.Shared.2.3.0\build\ReportPortal.Shared.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.75.0.3770.140\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.75.0.3770.140\build\Selenium.WebDriver.ChromeDriver.targets')" />
 </Project>

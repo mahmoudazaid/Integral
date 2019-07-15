@@ -9,22 +9,31 @@ namespace Web.Automation.SpecFlow
     public sealed class Hooks
     {
         protected static string browserName = ConfigurationManager.AppSettings["browser"];
+        private static string baseURL = ConfigurationManager.AppSettings["URL"];
+        private readonly ScenarioContext scenarioContext;
+
+        public Hooks(ScenarioContext scenarioContext)
+        {
+            this.scenarioContext = scenarioContext;
+        }
+
 
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
 
         [BeforeScenario]
         public void BeforeScenario()
         {
-           // VideoRecorder.StartRecordingVideo(ScenarioContext.Current.ScenarioInfo.Title);
+            VideoRecorder.StartRecordingVideo(ScenarioContext.Current.ScenarioInfo.Title);
             Driver.OpenBrowser(browserName);
+            Driver.Visit(baseURL);
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            if (ScenarioContext.Current.TestError != null)
+            if (scenarioContext.TestError != null)
                 ScreenShot.TakeScreenShot();
-            //VideoRecorder.EndRecording();
+            VideoRecorder.EndRecording();
             Driver.CloseBrowser();
         }
     }
