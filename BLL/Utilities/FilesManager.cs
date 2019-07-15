@@ -35,5 +35,14 @@ namespace BLL.Utilities
             File.Delete(filename);
             Console.WriteLine($"{filename} is deleted.");
         }
+
+        public static void CreateFolder(string path)
+        {
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
     }
 }

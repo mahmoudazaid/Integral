@@ -1,10 +1,6 @@
 ﻿using BLL.Browser;
 using BLL.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace Web.Automation.SpecFlow
@@ -19,6 +15,7 @@ namespace Web.Automation.SpecFlow
         [BeforeScenario]
         public void BeforeScenario()
         {
+            VideoRecorder.StartRecordingVideo(ScenarioContext.Current.ScenarioInfo.Title);
             Driver.OpenBrowser(browserName);
         }
 
@@ -26,7 +23,8 @@ namespace Web.Automation.SpecFlow
         public void AfterScenario()
         {
             if (ScenarioContext.Current.TestError != null)
-                ScreenShot.TakeScreenShot();            
+                ScreenShot.TakeScreenShot();
+            VideoRecorder.EndRecording();
             Driver.CloseBrowser();
         }
     }

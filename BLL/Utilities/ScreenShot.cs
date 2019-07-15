@@ -11,7 +11,7 @@ namespace BLL.Utilities
         {
             var takesScreenshot = Driver.WebDriver as ITakesScreenshot;
             string ScreenShootPath = Path.Combine(Directory.GetCurrentDirectory() + "\\ScreenShoots");
-            CreateFolder(ScreenShootPath);
+            FilesManager.CreateFolder(ScreenShootPath);
             if (takesScreenshot != null)
             {
                 var screenshot = takesScreenshot.GetScreenshot();
@@ -21,13 +21,6 @@ namespace BLL.Utilities
             }
         }
 
-        public static void CreateFolder(string path)
-        {
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
+        
     }
 }
