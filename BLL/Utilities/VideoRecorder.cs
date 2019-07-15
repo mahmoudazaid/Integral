@@ -17,7 +17,7 @@ namespace BLL.Utilities
 
 
             string timestamp = DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss");
-            vidRec.OutputScreenCaptureFileName = $@"{VideoPath}"  + scenarioTitle + " " + timestamp + ".avi";
+            vidRec.OutputScreenCaptureFileName = VideoPath  + scenarioTitle + " " + timestamp + ".mp4";            
             vidRec.Start();
         }
 

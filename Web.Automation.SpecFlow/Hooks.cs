@@ -15,7 +15,7 @@ namespace Web.Automation.SpecFlow
         [BeforeScenario]
         public void BeforeScenario()
         {
-            VideoRecorder.StartRecordingVideo(ScenarioContext.Current.ScenarioInfo.Title);
+           // VideoRecorder.StartRecordingVideo(ScenarioContext.Current.ScenarioInfo.Title);
             Driver.OpenBrowser(browserName);
         }
 
@@ -24,7 +24,7 @@ namespace Web.Automation.SpecFlow
         {
             if (ScenarioContext.Current.TestError != null)
                 ScreenShot.TakeScreenShot();
-            VideoRecorder.EndRecording();
+            //VideoRecorder.EndRecording();
             Driver.CloseBrowser();
         }
     }
