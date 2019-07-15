@@ -12,7 +12,7 @@ namespace BLL.Utilities
 
         public static void StartRecordingVideo(string scenarioTitle)
         {            
-            string VideoPath = Path.Combine(Directory.GetCurrentDirectory() + "\\ViedoRecords");
+            string VideoPath = Path.Combine(Directory.GetCurrentDirectory() + "\\ViedoRecords\\");
             FilesManager.CreateFolder(VideoPath);
 
 
@@ -24,7 +24,6 @@ namespace BLL.Utilities
         public static void EndRecording()
         {
             vidRec.Stop();
-            vidRec.Dispose();
         }
     }
 

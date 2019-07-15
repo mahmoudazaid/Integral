@@ -31,6 +31,7 @@ namespace Web.Automation.SpecFlow
         [AfterScenario]
         public void AfterScenario()
         {
+            
             if (scenarioContext.TestError != null)
                 ScreenShot.TakeScreenShot();
             VideoRecorder.EndRecording();

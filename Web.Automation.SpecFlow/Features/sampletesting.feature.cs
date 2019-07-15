@@ -18,7 +18,9 @@ namespace Web.Automation.SpecFlow.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("Verify sample tests for home and login screen", new string[] {
-            "Chrome"}, SourceFile="Features\\SampleTesting.feature", SourceLine=1)]
+            "Chrome",
+            "EN",
+            "AR"}, SourceFile="Features\\SampleTesting.feature", SourceLine=1)]
     public partial class VerifySampleTestsForHomeAndLoginScreenFeature
     {
         
@@ -32,7 +34,9 @@ namespace Web.Automation.SpecFlow.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Verify sample tests for home and login screen", null, ProgrammingLanguage.CSharp, new string[] {
-                        "Chrome"});
+                        "Chrome",
+                        "EN",
+                        "AR"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

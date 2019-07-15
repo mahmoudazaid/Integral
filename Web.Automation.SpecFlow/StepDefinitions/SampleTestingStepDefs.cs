@@ -5,8 +5,10 @@ using FluentAssertions;
 using Gherkin.Ast;
 using OpenQA.Selenium;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading;
 using TechTalk.SpecFlow;
 
@@ -16,6 +18,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
     public sealed class SampleTestingStepDefs:Steps
     {
         private readonly ParsersManager _parser = new ParsersManager("SampleTestingPageObject.json");
+        public static string[] tag = FeatureContext.Current.FeatureInfo.Tags;        
 
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
@@ -23,7 +26,8 @@ namespace Web.Automation.SpecFlow.StepDefinitions
 
         public SampleTestingStepDefs(ScenarioContext injectedContext)
         {
-            context = injectedContext;
+            context = injectedContext;            
+
         }
 
         [Given(@"Jawwytv site opens successfully")]
@@ -65,7 +69,19 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         {
             //Read the elemnet locator from JSON File
             var changeLanguage = _parser.GetElementByName("ChangeLanguage");
-            SEActions.ClickButton(changeLanguage);
+            // Reaad Scienario Tag           
+            var CurrentUrl = Driver.WebDriver.Url;
+
+            if (tag.Where(x => x == "EN").ToString() == "EN" & CurrentUrl.Substring("http://www.jawwy.tv".Length) != "en/home")
+            {
+                
+                SEActions.ClickButton(changeLanguage);
+            }
+            else if(tag.Where(x => x == "AR").ToString() == "AR" & CurrentUrl.Substring("http://www.jawwy.tv".Length) == "en/home")
+            {
+                SEActions.ClickButton(changeLanguage);
+            }
+
         }
       
 
@@ -104,20 +120,53 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         public void ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen()
         {
             //Calling nested step defention 
-            Then(@"I should see ""Set up your payment method"" on ""StepName""");
-            Then(@"I should see ""BACK"" on ""BackButton""");           
+            if(tag.Where(x => x == "EN").ToString() == "EN")
+            {
+                Then(@"I should see ""Set up your payment method"" on ""StepName""");
+                Then(@"I should see ""BACK"" on ""BackButton""");
+            }            
+            else if(tag.Where(x => x == "AR").ToString() == "AR" )
+            {
+                Then(@"I should see ""قم بإعداد طريقة الدفع الخاصة بك"" on ""StepName""");
+                Then(@"I should see ""رجوع"" on ""BackButton""");
+            }
         }
 
         [Then(@"User should selects ""(.*)"" from country dropdown menu")]
         public void ThenUserShouldSelectsLebanonFromCountryDropdownMenu(string selection)
         {
+            //Get the element locator
             var dropwdown = _parser.GetElementByName("Countries");
-            SEActions.SelectFromDropDown(dropwdown, selection);
+
+            //Put the countries in Dictionary
+            Dictionary<string, string> countries = new Dictionary<string, string>()
+            {
+
+            { "Lebanon", "لبنان"},
+            { "Bahrain", "البحرين"}
+            };
+
+            if (tag.Where(x => x == "EN").ToString() == "EN" )
+            {
+                SEActions.SelectFromDropDown(dropwdown, selection);
+            }
+            else if (tag.Where(x => x == "AR").ToString() == "AR" )
+            {
+                SEActions.SelectFromDropDown(dropwdown, countries[selection]);
+
+
+            }
         }
 
         [Then(@"User should see that only ""(.*)"" payment method is displayed")]
         public void ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed(string provider)
         {
+            Dictionary<string, string> pay = new Dictionary<string, string>()
+            {
+
+            { "Credit Card", "بطاقة الائتمان"}
+            };
+
             Thread.Sleep(3000);
             //Read the elemnet locator from JSON File
             var _element = _parser.GetElementByName("Providers");
@@ -132,14 +181,22 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //read the titles and put innto the array
             foreach (var title in providersName)
                 providers[i++] = title.Text;
-            //Comparing 2 arrays
-            providers.Should().BeEquivalentTo(new[] { provider });
+            if(tag.Where(x => x == "EN").ToString() == "EN" )
+            {
+                //Comparing 2 arrays
+                providers.Should().BeEquivalentTo(new[] { provider });
+            }            
+            else if(tag.Where(x => x == "AR").ToString() == "AR" )
+            {
+                //Comparing 2 arrays after read the valye from the dectionary
+                providers.Should().BeEquivalentTo(new[] { pay[provider] });
+
+            }
         }
       
         [Then(@"User should see that (.*) payment methods are displayed")]
         public void ThenUserShouldSeeThatTwoPaymentMethodsAreDisplayed(int PymentsNumber)
         {
-
             Thread.Sleep(3000);
             //Read the elemnet locator from JSON File
             var _element = _parser.GetElementByName("Providers");
@@ -170,8 +227,15 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         [Then(@"User should navigate to Create your account section")]
         public void ThenUserShouldNavigateToCreateYourAccountSection()
         {
-            //Calling nested step defention 
-            Then(@"I should see ""Create your account"" on ""StepName""");
+            if (tag.Where(x => x == "EN").ToString() == "EN" )
+            {
+                //Calling nested step defention            
+                Then(@"I should see ""Create your account"" on ""StepName""");
+            }
+            else if (tag.Where(x => x == "AR").ToString() == "AR" )
+            {
+                Then(@"I should see ""أنشئ حسابك"" on ""StepName""");
+            }
         }
 
         [Then(@"User clicks on Terms and Conditions link in create your account section")]
@@ -184,8 +248,16 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         [Then(@"User should see that Terms & Conditions section is displayed")]
         public void ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed()
         {
-            //Calling nested step defention 
-            Then(@"I should see ""TERMS & CONDITIONS"" on ""FormName""");
+            if(tag.Where(x => x == "EN").ToString() == "EN" )
+            {
+                //Calling nested step defention 
+                Then(@"I should see ""TERMS & CONDITIONS"" on ""FormName""");
+            }
+            else if(tag.Where(x => x == "AR").ToString() == "AR" )
+            {
+                //Calling nested step defention 
+                Then(@"I should see ""الشروط والأحكام"" on ""FormName""");
+            }
         }
 
 
