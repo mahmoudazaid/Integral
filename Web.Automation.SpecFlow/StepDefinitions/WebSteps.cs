@@ -14,58 +14,21 @@ namespace Web.Automation.SpecFlow
     [Binding]
     public sealed class SharedSteps
     {
-        private static string baseURL = ConfigurationManager.AppSettings["URL"];
         private readonly ParsersManager _parser = new ParsersManager("SampleTestingPageObject.json");
-
-
-        [When(@"[Cc]lick on ""(.*)"" Link")]
-        public void WhenClickOnLink(string link)
-        {
-            try
-            {
-                var _link = _parser.GetElementByName(link);
-                SEActions.ClickLink(_link);                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }            
-        }
-
-        [When(@"[Cc]hoose ""(.*)"" file to upload")]
-        public void WhenChooseFileToUpload(string _file)
-        {
-            var _uploadButton = _parser.GetElementByName("Choose file");
-            SEActions.UploadFile(_uploadButton, _file);
-        }
-
-        [When(@"[Cc]lick on ""(.*)"" button")]
-        public void WhenClickOnButton(string _button)
-        {
-            var _uploadButton = _parser.GetElementByName(_button);
-            SEActions.ClickButton(_uploadButton);
-        }
-
+                
         [Then(@"I should see ""(.*)"" on ""(.*)""")]
         public void ThenIShouldSee(string _text,string el)
         {
+            //read the elemnt locatores from JSOn file
             var _element = _parser.GetElementByName(el);
+            //Scroll to the element bu Java script
             Driver.WebDriver.ScrollToElement(_element, 10);
+            //Inspec the element
             IWebElement element = Driver.WebDriver.InspectElement(_element);
+            //read the element text
             string elementText = element.Text;
+            //comparing rhe element
             elementText.Should().Be(_text);
-        }     
-
-        [Then(@"[Dd]elete ""(.*)"" file")]
-        public void ThenDeleteFile(string _filename)
-        {
-            FilesManager.DeleteFile(_filename);
-        }
-        [When(@"([Cc]heck|[Uu]n[Cc]heck) on ""(.*)"" checkbox")]
-        public void WhenSelectCheckbox(string _checkbox)
-        {
-            var checkbox = _parser.GetElementByName(_checkbox);
-            SEActions.SelectCheckBox(checkbox);
-        }
+        }             
     }
 }
