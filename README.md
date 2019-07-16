@@ -32,4 +32,9 @@
 <img src="images/specflow.png">
 <h4>4. Build the Solution</h4>
 <img src="images/build.png">
+<h4>5. From test Explorer choose your test case to run</h4>
+<img src="images/TestExplorer.png">
+<h4>6. Make Sure you downloded the Chrome version 75.0.3770.100 </h4>
+<h4>7. Make sure you were downloded Microsoft Expression Encoder 4 from <a href="https://www.microsoft.com/en-sa/download/details.aspx?id=18974">here</a>
+ </h4>
 
