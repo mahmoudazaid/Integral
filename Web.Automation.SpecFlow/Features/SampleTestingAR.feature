@@ -1,5 +1,5 @@
 ﻿@Chrome  @AR
-Feature: Verify sample tests for home and login screen
+Feature: Verify sample tests for home and login screen Arabic
 
 Background: 
 Given Jawwytv site opens successfully
