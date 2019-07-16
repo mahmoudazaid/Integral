@@ -35,4 +35,3 @@ Scenario: Validate terms and conditions page
     Then User clicks on Terms and Conditions link in create your account section
     Then User should see that Terms & Conditions section is displayed
 
-

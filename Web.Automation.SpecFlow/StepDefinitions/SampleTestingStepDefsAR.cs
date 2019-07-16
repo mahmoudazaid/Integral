@@ -131,7 +131,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
 
 
         [Then(@"User should see that Terms & Conditions section is displayed")]
-        [Scope(Tag="EN")]
+        [Scope(Tag="AR")]
         public void ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed()
         {
             //Calling nested step defention 

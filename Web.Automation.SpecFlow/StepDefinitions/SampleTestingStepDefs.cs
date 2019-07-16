@@ -190,7 +190,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             SEActions.ClickLink(link);
         }
 
-        [Then(@"User should see that Terms & Conditions section is displayed")]
+        [Then(@"[Uu]ser should see that Terms & Conditions section is displayed")]
         [Scope(Tag="EN")]
         public void ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed()
         {
