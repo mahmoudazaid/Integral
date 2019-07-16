@@ -10,9 +10,9 @@
     <TestAssemblyPath>Web.Automation.SpecFlow.dll</TestAssemblyPath>
   </TestAssemblyPaths>
 
-  <!--<Report>
+  <Report>
     <Template name="Reports\ReportTemplate.cshtml" outputName="TestResult.html"/>
-  </Report>-->
+  </Report>
 
   <DeploymentTransformation>
     <Steps>

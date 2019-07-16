@@ -20,13 +20,13 @@ namespace Web.Automation.SpecFlow.Features
     [TechTalk.SpecRun.FeatureAttribute("Verify sample tests for home and login screen", new string[] {
             "Chrome",
             "EN",
-            "AR"}, SourceFile="Features\\SampleTesting.feature", SourceLine=1)]
+            "AR"}, SourceFile="Features\\sampletesting.feature", SourceLine=1)]
     public partial class VerifySampleTestsForHomeAndLoginScreenFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SampleTesting.feature"
+#line 1 "sampletesting.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
