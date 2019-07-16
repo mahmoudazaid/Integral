@@ -11,8 +11,11 @@
         <img alt="Nuget" src="https://img.shields.io/nuget/dt/NUnit.svg?label=NUnit&logo=NUnit"></a>
 </p>
 
- <h3 align="center">Integral</h3>
-
+<p align="center">
+  <a href="https://github.com/mahmoudazaid/Integral">
+    <img src="images/Logo.jpg" alt="Logo">
+  </a>
+    
   <p align="center">
     <br />
     <a href="#about-the-project"><strong>Read Instructions »</strong></a>
