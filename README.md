@@ -25,11 +25,11 @@
 
 
 ## Instructions
-1. Visual studio installed
-2. Clone the project to your machine
-3. Make sure SpecFlow installed in Visual Studio: Under Tools > Extenstions and Update
+<h4> 1. Visual studio installed</h4>
+<h4> 2. Clone the project to your machine</h4>
+<h4>3. Make sure SpecFlow installed in Visual Studio: Under Tools > Extenstions and Update</h4>
 <img src="images/Extensions.png">
 <img src="images/specflow.png">
-4. Build the Solution
+<h4>4. Build the Solution</h4>
 <img src="images/build.png">
 
