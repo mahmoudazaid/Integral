@@ -19,6 +19,7 @@
   <p align="center">
     <br />
     <a href="#instructions"><strong>Read Instructions »</strong></a>
+    <a href="https://github.com/mahmoudazaid/Integral/tree/master/TestResults"><strong>Test Results</strong></a>    
     <br />    
   </p>
 </p>
