@@ -21,31 +21,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         public SampleTestingStepDefsAR(ScenarioContext injectedContext)
         {
             context = injectedContext;
-        }
-
-        [Given(@"Jawwytv site opens successfully")]
-        [Scope(Tag = "AR")]
-        public void GivenJawwytvSiteOpensSuccessfully()
-        {
-            //difne an array that contains all sections in the page
-            string[] ArTitles = { "أفلام ومسلسلات", "البث المباشر", "الميزات", "الأسئلة المتكررة" };
-
-            //read the element locator
-            var _element = _parser.GetElementByName("SectionTitle");
-            //Sccroll to the element
-            Driver.WebDriver.ScrollToElement(_element, 10);
-            //Inspect the element
-            IList<IWebElement> sections = Driver.WebDriver.FindElements(_element);
-            // Difin an Array to carr all section tiltes in the paage
-            String[] sectionTitles = new String[sections.Count];
-
-            var i = 0;
-            //read the titles and put innto the array
-            foreach (var title in sections)
-                sectionTitles[i++] = title.Text;
-
-            sectionTitles.Should().BeEquivalentTo(ArTitles);
-        }
+        }       
 
         [When(@"User changes language in welcome screen")]
         [Scope(Tag = "AR")]
@@ -60,7 +36,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //Read the element text
             string btn = button.Text;
 
-            if (btn == "ENGLISH")
+            if (btn == "العربية")
                 SEActions.ClickButton(changeLanguage);
         }
 

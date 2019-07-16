@@ -31,11 +31,8 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         }
 
         [Given(@"Jawwytv site opens successfully")]
-        [Scope(Tag="EN")]
         public void GivenJawwytvSiteOpensSuccessfully()
-        {
-            //difne an array that contains all sections in the page
-            string[] EnTitles = { "Movies and TV Shows", "Live TV", "Features", "FREQUENTLY ASKED QUESTIONS" };
+        {                       
             //read the element locator
             var _element = _parser.GetElementByName("SectionTitle");
             //Sccroll to the element
@@ -45,13 +42,34 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             // Difin an Array to carr all section tiltes in the paage
             String[] sectionTitles = new String[sections.Count];
 
-            var i = 0;
+            var changeLanguage = _parser.GetElementByName("ChangeLanguage");
+            //Scroll to Element
+            Driver.WebDriver.ScrollToElement(changeLanguage, 10);
+            //Inspec the element
+            IWebElement button = Driver.WebDriver.InspectElement(changeLanguage);
+            //Read the element text
+            string btn = button.Text;            
+
+                var i = 0;
             //read the titles and put innto the array
             foreach (var title in sections)
                 sectionTitles[i++] = title.Text;
-            
-            sectionTitles.Should().BeEquivalentTo(EnTitles);
-                   
+
+            if (btn == "العربية")
+            {
+                //difne an array that contains all sections in the page
+                string[] EnTitles = { "Movies and TV Shows", "Live TV", "Features", "FREQUENTLY ASKED QUESTIONS" };
+                sectionTitles.Should().BeEquivalentTo(EnTitles);
+            }
+            else if (btn == "ENGLISH")
+            {
+                //difne an array that contains all sections in the page
+                string[] ArTitles = { "أفلام ومسلسلات", "البث المباشر", "الميزات", "الأسئلة المتكررة" };
+                sectionTitles.Should().BeEquivalentTo(ArTitles);
+            }
+
+
+
         }
 
         [When(@"User changes language in welcome screen")]
@@ -67,7 +85,7 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //Read the element text
             string btn = button.Text;
 
-            if (btn == "العربية")
+            if (btn == "ENGLISH")
                 SEActions.ClickButton(changeLanguage);
         }
       
