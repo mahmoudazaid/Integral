@@ -31,8 +31,11 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         }
 
         [Given(@"Jawwytv site opens successfully")]
+        [Scope(Tag="EN")]
         public void GivenJawwytvSiteOpensSuccessfully()
         {
+            //difne an array that contains all sections in the page
+            string[] EnTitles = { "Movies and TV Shows", "Live TV", "Features", "FREQUENTLY ASKED QUESTIONS" };
             //read the element locator
             var _element = _parser.GetElementByName("SectionTitle");
             //Sccroll to the element
@@ -46,26 +49,13 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //read the titles and put innto the array
             foreach (var title in sections)
                 sectionTitles[i++] = title.Text;
-
-            //read the current URL
-            var CurrentUrl = Driver.WebDriver.Url;
             
-            //check if the page opened in English or Arabic
-            if (CurrentUrl.Substring("http://www.jawwy.tv".Length) == "en/home")
-            {
-                //difne an array that contains all sections in the page
-                string[] EnTitles = { "Movies and TV Shows", "Live TV", "Features", "FREQUENTLY ASKED QUESTIONS" };
-                sectionTitles.Should().BeEquivalentTo(EnTitles);
-            }
-            else
-            {
-                //difne an array that contains all sections in the page
-                string[] ArTitles = { "أفلام ومسلسلات", "البث المباشر", "الميزات", "الأسئلة المتكررة" };
-                sectionTitles.Should().BeEquivalentTo(ArTitles);
-            }            
+            sectionTitles.Should().BeEquivalentTo(EnTitles);
+                   
         }
 
         [When(@"User changes language in welcome screen")]
+        [Scope(Tag = "EN")]
         public void WhenUserChangesLanguageInWelcomeScreen()
         {
             //Read the elemnet locator from JSON File
@@ -77,15 +67,8 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //Read the element text
             string btn = button.Text;
 
-            if (tag[1] == "EN" && btn == "ENGLISH")
-            {                
+            if (btn == "العربية")
                 SEActions.ClickButton(changeLanguage);
-            }
-            else if(tag[2]== "AR" && btn == "العربية")
-            {
-                SEActions.ClickButton(changeLanguage);
-            }
-
         }
       
 
@@ -122,55 +105,27 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         }
 
         [Then(@"User should see back button displayed on payment screen")]
+        [Scope(Tag = "EN")]
         public void ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen()
         {
-            if(tag[1] == "EN")
-            {
-                //Calling nested step defintion
-                Then(@"I should see ""Set up your payment method"" on ""StepName""");
-                Then(@"I should see ""BACK"" on ""BackButton""");
-            }            
-            else if(tag[2] == "AR" )
-            {
-                Then(@"I should see ""قم بإعداد طريقة الدفع الخاصة بك"" on ""StepName""");
-                Then(@"I should see ""رجوع"" on ""BackButton""");
-            }
+            //Calling nested step defintion
+            Then(@"I should see ""Set up your payment method"" on ""StepName""");
+            Then(@"I should see ""BACK"" on ""BackButton""");
         }
 
         [Then(@"User should selects ""(.*)"" from country dropdown menu")]
+        [Scope(Tag = "EN")]
         public void ThenUserShouldSelectsLebanonFromCountryDropdownMenu(string selection)
         {
             //Get the element locator
             var dropwdown = _parser.GetElementByName("Countries");
-
-            //Put the countries in Dictionary
-            Dictionary<string, string> countries = new Dictionary<string, string>()
-            {
-
-            { "Lebanon", "لبنان"},
-            { "Bahrain", "البحرين"}
-            };
-
-            if (tag[1] == "EN" )
-            {
-                SEActions.SelectFromDropDown(dropwdown, selection);
-            }
-            else if (tag[2] == "AR" )
-            {
-                SEActions.SelectFromDropDown(dropwdown, countries[selection]);
-            }
+            SEActions.SelectFromDropDown(dropwdown, selection);            
         }
 
         [Then(@"User should see that only ""(.*)"" payment method is displayed")]
+        [Scope(Tag = "EN")]
         public void ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed(string provider)
         {
-            //put the providers in dectionary to carry the name of them in English and Arabic
-            Dictionary<string, string> pay = new Dictionary<string, string>()
-            {
-
-            { "Credit Card", "بطاقة الائتمان"}
-            };
-
             Thread.Sleep(3000);
             //Read the elemnet locator from JSON File
             var _element = _parser.GetElementByName("Providers");
@@ -185,17 +140,8 @@ namespace Web.Automation.SpecFlow.StepDefinitions
             //read the titles and put innto the array
             foreach (var title in providersName)
                 providers[i++] = title.Text;
-            if(tag[1] == "EN" )
-            {
-                //Comparing 2 arrays
-                providers.Should().BeEquivalentTo(new[] { provider });
-            }            
-            else if(tag[2] == "AR" )
-            {
-                //Comparing 2 arrays after read the valye from the dectionary
-                providers.Should().BeEquivalentTo(new[] { pay[provider] });
-
-            }
+         //Comparing 2 arrays
+         providers.Should().BeEquivalentTo(new[] { provider });         
         }
       
         [Then(@"User should see that (.*) payment methods are displayed")]
@@ -229,17 +175,11 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         }
 
         [Then(@"User should navigate to Create your account section")]
+        [Scope(Tag="EN")]
         public void ThenUserShouldNavigateToCreateYourAccountSection()
         {
-            if (tag[1] == "EN" )
-            {
-                //Calling nested step defention            
-                Then(@"I should see ""Create your account"" on ""StepName""");
-            }
-            else if (tag[2] == "AR" )
-            {
-                Then(@"I should see ""أنشئ حسابك"" on ""StepName""");
-            }
+          //Calling nested step defention            
+          Then(@"I should see ""Create your account"" on ""StepName""");
         }
 
         [Then(@"User clicks on Terms and Conditions link in create your account section")]
@@ -251,18 +191,11 @@ namespace Web.Automation.SpecFlow.StepDefinitions
         }
 
         [Then(@"User should see that Terms & Conditions section is displayed")]
+        [Scope(Tag="EN")]
         public void ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed()
         {
-            if(tag[1] == "EN" )
-            {
-                //Calling nested step defention 
-                Then(@"I should see ""TERMS & CONDITIONS"" on ""FormName""");
-            }
-            else if(tag[2] == "AR" )
-            {
-                //Calling nested step defention 
-                Then(@"I should see ""الشروط والأحكام"" on ""FormName""");
-            }
+            //Calling nested step defention 
+            Then(@"I should see ""TERMS & CONDITIONS"" on ""FormName""");            
         }
     }
 }

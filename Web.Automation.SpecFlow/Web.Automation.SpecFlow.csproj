@@ -112,12 +112,14 @@
     <Compile Include="Hooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\SampleTestingStepDefs.cs" />
+    <Compile Include="StepDefinitions\SampleTestingStepDefsAR.cs" />
     <Compile Include="StepDefinitions\WebSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Default.srprofile" />
-    <None Include="Features\SampleTesting.feature" />
+    <None Include="Features\SampleTestingAR.feature" />
+    <None Include="Features\SampleTestingEN.feature" />
     <None Include="ObjectRepository\SampleTestingPageObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

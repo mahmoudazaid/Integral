@@ -1,4 +1,4 @@
-﻿@Chrome  @EN @AR
+﻿@Chrome  @AR
 Feature: Verify sample tests for home and login screen
 
 Background: 
