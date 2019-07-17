@@ -37,9 +37,8 @@
 5. <strong>From test Explorer choose your test case to run</strong>
 <img src="images/TestExplorer.png">
 6. <strong>Make Sure you downloded the Chrome version 75.0.3770.100 </strong>
-7. <strong>Make sure you were downloded Microsoft Expression Encoder 4 from <a href="https://www.microsoft.com/en-sa/download/details.aspx?id=18974">here</a>
- </strong>
- 8. <strong>Make Sure to run the recorded videos from selenium by VLC application</strong>
+7. <strong>Make sure you were downloded Microsoft Expression Encoder 4 from <a href="https://www.microsoft.com/en-sa/download/details.aspx?id=18974">here</a></strong>
+8. <strong>Make Sure to run the recorded videos from selenium by VLC application</strong>
 
 ## Project Structure 
 1. <strong>BLL Project: Contains The selenium logic</strong>
