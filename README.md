@@ -66,3 +66,6 @@
     * <strong>ObjectRepository:</strong> Contains the JSON files that contain the elements locators 
     * <strong>Reports:</strong> Contains the report template
     * <strong>Hooks.cs:</strong> The class responsible for setup and teardown 
+    
+## Note:
+There is 2 Featres file has been created one for English and the other one for Arabic, but one feature file is enough only what you need is change the tag between `@EN` and `@AR`
