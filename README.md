@@ -18,9 +18,9 @@
     
   <p align="center">
     <br />
-    <a href="#instructions"><strong>Read Instructions</strong></a>
-    <a href="#structure"><strong>Project Structure</strong></a>
-    <a href="https://github.com/mahmoudazaid/Integral/tree/master/TestResults"><strong>Test Results</strong></a>    
+    <a href="#instructions"><strong>Read Instructions.</strong></a>
+    <a href="#project-structure"><strong>Project Structure.</strong></a>
+    <a href="https://github.com/mahmoudazaid/Integral/tree/master/TestResults"><strong>Test Results.</strong></a>    
     <br />    
   </p>
 </p>
@@ -41,26 +41,26 @@
  </h4>
  <h4>8. Make Sure to run the recorded videos from selenium by VLC application</h4>
 
-## Structure 
-<h4>1. BLL Solution: Contains The selenium logic</h4>
-* Browser: Contains driver class to open the browser
-    * Extensions: Contains the classes that responsoble for actions
+## Project Structure 
+1. <strong>BLL Solution: Contains The selenium logic</strong>
+    * <strong>Browser:</strong> Contains driver class to open the browser
+    * <strong>Extensions:</strong> Contains the classes that responsoble for actions
         * DriverExtensions.cs: responsible for handel browser actions like scrolling and alerts
         * ElementExtensions.cs: responsible for element inspections and waiting
         * JSExtensions.cs: contians method that take a java script and runnig it
         * SEActions.cs: resonsible for selenium actions such as (Click, SendKeys)
-    * Utlities: contains helper classes
-    * FileManager.cs: responsible for acting with system directories like (Check file downoaded, Delete file from the system, create directory)
-    * ScreenShot.cs: responsible for taking screenshot from the system
-    * VideoRecorder.cs: responsible for recording video
-   * WebElementParser: responsible reading the elements locatores from JSON file
-    * ParserManager.cs: read all JSONs parsed from the step defention class
-    * ElementParser.cs: read the elements from JSON and deserlize it
-    * LocatorFactory: read the loctor from the JSON based on type such as (XPath)
-    * LoctorTypes.cs: contains all locator types.
-    * WebElement.cs: contains the JSON elements to use it in deserlization
+    * <strong>Utlities:</strong> contains helper classes
+        * FileManager.cs: responsible for acting with system directories like (Check file downoaded, Delete file from the system, create directory)
+        * ScreenShot.cs: responsible for taking screenshot from the system
+        * VideoRecorder.cs: responsible for recording video
+    * <strong>WebElementParser</strong>: responsible reading the elements locatores from JSON file
+        * ParserManager.cs: read all JSONs parsed from the step defention class
+        * ElementParser.cs: read the elements from JSON and deserlize it
+        * LocatorFactory: read the loctor from the JSON based on type such as (XPath)
+        * LoctorTypes.cs: contains all locator types.
+        * WebElement.cs: contains the JSON elements to use it in deserlization
    
-<h4>2. Web.Automation.SpecFlow: Contains the all features file and step defentions</h4>
+2. <strong>Web.Automation.SpecFlow: Contains the all features file and step defentions</strong>
     * Features: Contains all BDD test cases
     * StepDefinitions: Contains all code behind test cases
     * ObjectRepository Contains the JSON files that contain the elements locators 
