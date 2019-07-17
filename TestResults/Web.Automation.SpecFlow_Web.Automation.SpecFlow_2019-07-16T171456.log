@@ -1,0 +1,332 @@
+﻿2019-07-16T17:14:56.4486053+02:00;VSTestExecutionThread;Info;SpecFlow+Runner execution started
+2019-07-16T17:14:56.4486053+02:00;VSTestExecutionThread;Info;SpecFlow+Runner 3.0.352 in Framework clr40 in x86 mode execution started
+2019-07-16T17:14:56.4486053+02:00;VSTestExecutionThread;Info;TestAdapter Location: D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\TechTalk.SpecRun.VisualStudio.TestAdapter.dll
+2019-07-16T17:14:56.6586044+02:00;VSTestExecutionThread;Info;SpecRun: running tests in D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\Web.Automation.SpecFlow.dll
+2019-07-16T17:14:56.6596054+02:00;VSTestExecutionThread;Info;Output folder configured to "D:\Automation Framewroks\Integral\TestResults" (default)
+2019-07-16T17:14:56.6596054+02:00;VSTestExecutionThread;Info;Profile: Web.Automation.SpecFlow
+2019-07-16T17:14:56.6996051+02:00;VSTestExecutionThread;Info;Log file path: D:\Automation Framewroks\Integral\TestResults\Web.Automation.SpecFlow_Web.Automation.SpecFlow_2019-07-16T171456.log
+2019-07-16T17:14:56.7136035+02:00;VSTestExecutionThread;Info;SpecFlow+Runner Evaluation Mode: Please purchase at http://www.specflow.org/plus to remove test execution delay.
+2019-07-16T17:14:56.7236064+02:00;Thread#13;Info;Checking license
+2019-07-16T17:14:56.7516035+02:00;Thread#13;Info;Evaluation mode: test execution starts in 9 seconds... (this delay is removed in the registered version)
+2019-07-16T17:15:05.7521061+02:00;Thread#13;Info;Evaluation delay finished.
+2019-07-16T17:15:05.7621070+02:00;Thread#13;Info;License check completed
+2019-07-16T17:15:05.7621070+02:00;Thread#13;Info;starting test run
+2019-07-16T17:15:05.7751087+02:00;Thread#13;Info;Discovering target: Chrome
+2019-07-16T17:15:05.7761074+02:00;Thread#13;Info;Discovering tests from assembly: D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\Web.Automation.SpecFlow.dll
+2019-07-16T17:15:06.3931073+02:00:Appdomain Disposed
+2019-07-16T17:15:06.3931073+02:00;Thread#13;Info;Discovered tests from assembly: D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\Web.Automation.SpecFlow.dll
+2019-07-16T17:15:06.3931073+02:00;Thread#13;Info;Discovering target: Firefox
+2019-07-16T17:15:06.3941081+02:00;Thread#13;Info;Discovering tests from assembly: D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\Web.Automation.SpecFlow.dll
+2019-07-16T17:15:06.5101070+02:00:Appdomain Disposed
+2019-07-16T17:15:06.5101070+02:00;Thread#13;Info;Discovered tests from assembly: D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\Web.Automation.SpecFlow.dll
+2019-07-16T17:15:06.5121075+02:00:Test Suite Dump
+2019-07-16T17:15:06.5141059+02:00:#0: Web.Automation.SpecFlow/Web.Automation.SpecFlow - 
+2019-07-16T17:15:06.5141059+02:00:#1: Chrome - 
+2019-07-16T17:15:06.5141059+02:00:#2: Web.Automation.SpecFlow - 
+2019-07-16T17:15:06.5141059+02:00:#3: Verify sample tests for home and login screen Arabic - 
+2019-07-16T17:15:06.5141059+02:00:#9: Verify sample tests for home and login screen - 
+2019-07-16T17:15:06.5901081+02:00:#4: Validate back button on payment screen on entering username and password - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen+Arabic/Scenario:Validate+back+button+on+payment+screen+on+entering+username+and+password
+2019-07-16T17:15:06.5901081+02:00:#5: Validate that one single payment method is available for Lebanon country - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen+Arabic/Scenario:Validate+that+one+single+payment+method+is+available+for+Lebanon+country
+2019-07-16T17:15:06.5901081+02:00:#6: Validate that two payment methods are available for Bahrain country - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen+Arabic/Scenario:Validate+that+two+payment+methods+are+available+for+Bahrain+country
+2019-07-16T17:15:06.5901081+02:00:#7: Validate user navigates back to subscribe now page - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen+Arabic/Scenario:Validate+user+navigates+back+to+subscribe+now+page
+2019-07-16T17:15:06.5901081+02:00:#8: Validate terms and conditions page - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen+Arabic/Scenario:Validate+terms+and+conditions+page
+2019-07-16T17:15:06.5901081+02:00:#10: Validate back button on payment screen on entering username and password - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen/Scenario:Validate+back+button+on+payment+screen+on+entering+username+and+password
+2019-07-16T17:15:06.5901081+02:00:#11: Validate that one single payment method is available for Lebanon country - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen/Scenario:Validate+that+one+single+payment+method+is+available+for+Lebanon+country
+2019-07-16T17:15:06.5901081+02:00:#12: Validate that two payment methods are available for Bahrain country - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen/Scenario:Validate+that+two+payment+methods+are+available+for+Bahrain+country
+2019-07-16T17:15:06.5901081+02:00:#13: Validate user navigates back to subscribe now page - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen/Scenario:Validate+user+navigates+back+to+subscribe+now+page
+2019-07-16T17:15:06.5901081+02:00:#14: Validate terms and conditions page - Target:Chrome/TestAssembly:Web.Automation.SpecFlow/Feature:Verify+sample+tests+for+home+and+login+screen/Scenario:Validate+terms+and+conditions+page
+2019-07-16T17:15:06.5901081+02:00:End: Test Suite Dump
+2019-07-16T17:15:06.6491080+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:15:06.6531088+02:00:Thread#:Scheduler: testitem #4 from normal test queue 
+2019-07-16T17:15:06.6541076+02:00:Thread#0:Scheduler: considering testitem #4 for thread 0
+2019-07-16T17:15:06.6801080+02:00:Thread#0:TestItem#4:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:15:06.6801080+02:00:Thread#0:TestItem#4:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:15:06.6801080+02:00:Thread#0:TestItem#4:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:15:06.6801080+02:00:Thread#0:Scheduler: using testitem #4 for thread 0
+2019-07-16T17:15:06.6831079+02:00:Thread#0:Scheduler: Test #4 is scheduled for thread
+2019-07-16T17:15:06.6841121+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:15:06.6901088+02:00:Thread #0: creating new test thread executor for Web.Automation.SpecFlow, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null (target: Chrome)
+2019-07-16T17:15:06.8111110+02:00:Thread #0: Creating test assembly executor for execution model AppDomain
+2019-07-16T17:15:06.8121079+02:00:Thread #0: Creating test assembly executor for execution model AppDomain
+2019-07-16T17:15:06.8121079+02:00:using TechTalk.SpecRun.Framework.Execution.InProcess.InProcAppDomainTestAssemblyExecutorHost to execute tests
+2019-07-16T17:15:06.9721066+02:00:Thread#0: Test #4/0 is started on thread #0
+2019-07-16T17:15:07.4856323+02:00:Thread#0:T:-> Loading plugin D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\SpecRun.Runtime.SpecFlowPlugin.dll
+2019-07-16T17:15:07.5046323+02:00:Thread#0:T:-> Using default config
+2019-07-16T17:15:28.5197199+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:15:32.9293675+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (4.2s)
+2019-07-16T17:15:32.9343693+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:15:33.2626976+02:00:Thread#0:T:done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)
+2019-07-16T17:15:33.2626976+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:15:44.2154803+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (11.0s)
+2019-07-16T17:15:44.2164788+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:15:45.2885778+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (1.1s)
+2019-07-16T17:15:45.2885778+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:15:45.9777931+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (0.7s)
+2019-07-16T17:15:45.9777931+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:15:46.7158692+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.7s)
+2019-07-16T17:15:46.7158692+02:00:Thread#0:B:Then User should see back button displayed on payment screen
+2019-07-16T17:15:48.0619754+02:00:Thread#0:B:Then I should see "قم بإعداد طريقة الدفع الخاصة بك" on "StepName"
+2019-07-16T17:15:48.8270776+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("قم بإعداد طريقة ا...", "StepName") (0.7s)
+2019-07-16T17:15:48.8320744+02:00:Thread#0:B:Then I should see "رجوع" on "BackButton"
+2019-07-16T17:15:49.2625762+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("رجوع", "BackButton") (0.4s)
+2019-07-16T17:15:49.2625762+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen() (2.5s)
+2019-07-16T17:15:49.2901474+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:15:49.2901474+02:00:Thread#:Scheduler: testitem #5 from normal test queue 
+2019-07-16T17:15:49.2901474+02:00:Thread#0:Scheduler: considering testitem #5 for thread 0
+2019-07-16T17:15:49.2901474+02:00:Thread#0:TestItem#5:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:15:49.2901474+02:00:Thread#0:TestItem#5:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:15:49.2901474+02:00:Thread#0:TestItem#5:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:15:49.2901474+02:00:Thread#0:Scheduler: using testitem #5 for thread 0
+2019-07-16T17:15:49.2901474+02:00:Thread#0:Scheduler: Test #5 is scheduled for thread
+2019-07-16T17:15:49.2901474+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:15:50.6753644+02:00:Thread#0: Test #4/0 is finished on thread #0 as Succeeded within 43.7022532 seconds
+2019-07-16T17:15:50.6793612+02:00:Thread#0: Test #5/0 is started on thread #0
+2019-07-16T17:16:13.1994917+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:16:14.4887475+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.3s)
+2019-07-16T17:16:14.4887475+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:16:14.7600026+02:00:Thread#0:T:done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)
+2019-07-16T17:16:14.7600026+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:16:28.1584680+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (13.4s)
+2019-07-16T17:16:28.1584680+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:16:29.3844377+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (1.2s)
+2019-07-16T17:16:29.3844377+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:16:30.0397487+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (0.7s)
+2019-07-16T17:16:30.0407597+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:16:30.5740550+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.5s)
+2019-07-16T17:16:30.5750754+02:00:Thread#0:B:And User should selects "Lebanon" from country dropdown menu
+2019-07-16T17:16:32.5865571+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldSelectsLebanonFromCountryDropdownMenu("Lebanon") (2.0s)
+2019-07-16T17:16:32.5865571+02:00:Thread#0:B:Then User should see that only "Credit Card" payment method is displayed
+2019-07-16T17:16:35.7435310+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed("Credit Card") (3.2s)
+2019-07-16T17:16:35.7435310+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:16:35.7445414+02:00:Thread#:Scheduler: testitem #6 from normal test queue 
+2019-07-16T17:16:35.7445414+02:00:Thread#0:Scheduler: considering testitem #6 for thread 0
+2019-07-16T17:16:35.7445414+02:00:Thread#0:TestItem#6:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:16:35.7445414+02:00:Thread#0:TestItem#6:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:16:35.7445414+02:00:Thread#0:TestItem#6:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:16:35.7445414+02:00:Thread#0:Scheduler: using testitem #6 for thread 0
+2019-07-16T17:16:35.7445414+02:00:Thread#0:Scheduler: Test #6 is scheduled for thread
+2019-07-16T17:16:35.7445414+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:16:37.0555483+02:00:Thread#0: Test #5/0 is finished on thread #0 as Succeeded within 46.3761871 seconds
+2019-07-16T17:16:37.0555483+02:00:Thread#0: Test #6/0 is started on thread #0
+2019-07-16T17:16:57.6052306+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:17:00.2507299+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (2.6s)
+2019-07-16T17:17:00.2507299+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:17:00.5059599+02:00:Thread#0:T:done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)
+2019-07-16T17:17:00.5059599+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:17:09.8617117+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (9.4s)
+2019-07-16T17:17:09.8627118+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:17:11.9546169+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (2.1s)
+2019-07-16T17:17:11.9546169+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:17:12.6757180+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (0.7s)
+2019-07-16T17:17:12.6757180+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:17:13.7143518+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (1.0s)
+2019-07-16T17:17:13.7153554+02:00:Thread#0:B:And User should selects "Bahrain" from country dropdown menu
+2019-07-16T17:17:15.0045197+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldSelectsLebanonFromCountryDropdownMenu("Bahrain") (1.3s)
+2019-07-16T17:17:15.0055215+02:00:Thread#0:B:Then User should see that 2 payment methods are displayed
+2019-07-16T17:17:18.1429855+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSeeThatTwoPaymentMethodsAreDisplayed(2) (3.1s)
+2019-07-16T17:17:18.1439882+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:17:18.1439882+02:00:Thread#:Scheduler: testitem #7 from normal test queue 
+2019-07-16T17:17:18.1439882+02:00:Thread#0:Scheduler: considering testitem #7 for thread 0
+2019-07-16T17:17:18.1439882+02:00:Thread#0:TestItem#7:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:17:18.1439882+02:00:Thread#0:TestItem#7:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:17:18.1439882+02:00:Thread#0:TestItem#7:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:17:18.1439882+02:00:Thread#0:Scheduler: using testitem #7 for thread 0
+2019-07-16T17:17:18.1439882+02:00:Thread#0:Scheduler: Test #7 is scheduled for thread
+2019-07-16T17:17:18.1439882+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:17:19.4617892+02:00:Thread#0: Test #6/0 is finished on thread #0 as Succeeded within 42.4062409 seconds
+2019-07-16T17:17:19.4617892+02:00:Thread#0: Test #7/0 is started on thread #0
+2019-07-16T17:17:43.0873065+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:17:44.7694683+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.7s)
+2019-07-16T17:17:44.7694683+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:17:45.0652868+02:00:Thread#0:T:done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)
+2019-07-16T17:17:45.0652868+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:17:55.1623882+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.1s)
+2019-07-16T17:17:55.1623882+02:00:Thread#0:B:Then User clicks on Click here link in create your account section
+2019-07-16T17:18:02.9693736+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnClickHereLinkInCreateYourAccountSection() (7.8s)
+2019-07-16T17:18:02.9703748+02:00:Thread#0:B:And User clicks on Subscribe link in Existing User section
+2019-07-16T17:18:06.4613822+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnSubscribeLinkInExistingUserSection() (3.5s)
+2019-07-16T17:18:06.4613822+02:00:Thread#0:B:Then User should navigate to Create your account section
+2019-07-16T17:18:06.4853873+02:00:Thread#0:B:Then I should see "أنشئ حسابك" on "StepName"
+2019-07-16T17:18:08.8835080+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("أنشئ حسابك", "StepName") (2.4s)
+2019-07-16T17:18:08.8835080+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldNavigateToCreateYourAccountSection() (2.4s)
+2019-07-16T17:18:08.8844710+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:18:08.8844710+02:00:Thread#:Scheduler: testitem #8 from normal test queue 
+2019-07-16T17:18:08.8844710+02:00:Thread#0:Scheduler: considering testitem #8 for thread 0
+2019-07-16T17:18:08.8844710+02:00:Thread#0:TestItem#8:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:18:08.8844710+02:00:Thread#0:TestItem#8:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:18:08.8844710+02:00:Thread#0:TestItem#8:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:18:08.8844710+02:00:Thread#0:Scheduler: using testitem #8 for thread 0
+2019-07-16T17:18:08.8844710+02:00:Thread#0:Scheduler: Test #8 is scheduled for thread
+2019-07-16T17:18:08.8844710+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:18:11.4542750+02:00:Thread#0: Test #7/0 is finished on thread #0 as Succeeded within 51.9924858 seconds
+2019-07-16T17:18:11.4552744+02:00:Thread#0: Test #8/0 is started on thread #0
+2019-07-16T17:18:39.6507360+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:18:40.7311154+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.1s)
+2019-07-16T17:18:40.7311154+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:18:41.2105247+02:00:Thread#0:T:done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.5s)
+2019-07-16T17:18:41.2105247+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:18:51.8933785+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.7s)
+2019-07-16T17:18:51.8933785+02:00:Thread#0:B:Then User clicks on Terms and Conditions link in create your account section
+2019-07-16T17:18:52.7352081+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnTermsAndConditionsLinkInCreateYourAccountSection() (0.8s)
+2019-07-16T17:18:52.7352081+02:00:Thread#0:B:Then User should see that Terms & Conditions section is displayed
+2019-07-16T17:18:52.7487273+02:00:Thread#0:B:Then I should see "الشروط والأحكام" on "FormName"
+2019-07-16T17:18:53.3543273+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("الشروط والأحكام", "FormName") (0.6s)
+2019-07-16T17:18:53.3543273+02:00:Thread#0:T:done: SampleTestingStepDefsAR.ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed() (0.6s)
+2019-07-16T17:18:53.3553281+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:18:53.3553281+02:00:Thread#:Scheduler: testitem #10 from normal test queue 
+2019-07-16T17:18:53.3553281+02:00:Thread#0:Scheduler: considering testitem #10 for thread 0
+2019-07-16T17:18:53.3553281+02:00:Thread#0:TestItem#10:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:18:53.3553281+02:00:Thread#0:TestItem#10:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:18:53.3553281+02:00:Thread#0:TestItem#10:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:18:53.3553281+02:00:Thread#0:Scheduler: using testitem #10 for thread 0
+2019-07-16T17:18:53.3553281+02:00:Thread#0:Scheduler: Test #10 is scheduled for thread
+2019-07-16T17:18:53.3553281+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:18:54.7270588+02:00:Thread#0: Test #8/0 is finished on thread #0 as Succeeded within 43.2717844 seconds
+2019-07-16T17:18:54.7280577+02:00:Thread#0: Test #10/0 is started on thread #0
+2019-07-16T17:19:28.8587064+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:19:30.0365180+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.2s)
+2019-07-16T17:19:30.0365180+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:19:59.7821010+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (29.7s)
+2019-07-16T17:19:59.7830994+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:20:06.0276360+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (6.2s)
+2019-07-16T17:20:06.0276360+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:20:08.8015016+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (2.8s)
+2019-07-16T17:20:08.8015016+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:20:09.5316132+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (0.7s)
+2019-07-16T17:20:09.5326125+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:20:09.8466128+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.3s)
+2019-07-16T17:20:09.8466128+02:00:Thread#0:B:Then User should see back button displayed on payment screen
+2019-07-16T17:20:09.8536116+02:00:Thread#0:B:Then I should see "Set up your payment method" on "StepName"
+2019-07-16T17:20:10.6696092+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("Set up your payme...", "StepName") (0.8s)
+2019-07-16T17:20:10.6776116+02:00:Thread#0:B:Then I should see "BACK" on "BackButton"
+2019-07-16T17:20:11.1001663+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("BACK", "BackButton") (0.4s)
+2019-07-16T17:20:11.1011678+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen() (1.3s)
+2019-07-16T17:20:11.1011678+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:20:11.1011678+02:00:Thread#:Scheduler: testitem #11 from normal test queue 
+2019-07-16T17:20:11.1011678+02:00:Thread#0:Scheduler: considering testitem #11 for thread 0
+2019-07-16T17:20:11.1011678+02:00:Thread#0:TestItem#11:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:20:11.1011678+02:00:Thread#0:TestItem#11:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:20:11.1011678+02:00:Thread#0:TestItem#11:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:20:11.1011678+02:00:Thread#0:Scheduler: using testitem #11 for thread 0
+2019-07-16T17:20:11.1011678+02:00:Thread#0:Scheduler: Test #11 is scheduled for thread
+2019-07-16T17:20:11.1011678+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:20:12.3706510+02:00:Thread#0: Test #10/0 is finished on thread #0 as Succeeded within 77.6425933 seconds
+2019-07-16T17:20:12.3706510+02:00:Thread#0: Test #11/0 is started on thread #0
+2019-07-16T17:20:34.1500235+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:20:35.6759675+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.5s)
+2019-07-16T17:20:35.6759675+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:20:44.8286632+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (9.2s)
+2019-07-16T17:20:44.8286632+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:20:55.0914167+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.3s)
+2019-07-16T17:20:55.0914167+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:20:56.1732725+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (1.1s)
+2019-07-16T17:20:56.1732725+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:20:57.2400517+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (1.1s)
+2019-07-16T17:20:57.2400517+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:20:57.9042359+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.7s)
+2019-07-16T17:20:57.9052361+02:00:Thread#0:B:And User should selects "Lebanon" from country dropdown menu
+2019-07-16T17:21:01.1134979+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSelectsLebanonFromCountryDropdownMenu("Lebanon") (3.2s)
+2019-07-16T17:21:01.1144987+02:00:Thread#0:B:Then User should see that only "Credit Card" payment method is displayed
+2019-07-16T17:21:04.3851839+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed("Credit Card") (3.3s)
+2019-07-16T17:21:04.3857383+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:21:04.3857383+02:00:Thread#:Scheduler: testitem #12 from normal test queue 
+2019-07-16T17:21:04.3857383+02:00:Thread#0:Scheduler: considering testitem #12 for thread 0
+2019-07-16T17:21:04.3857383+02:00:Thread#0:TestItem#12:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:21:04.3857383+02:00:Thread#0:TestItem#12:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:21:04.3857383+02:00:Thread#0:TestItem#12:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:21:04.3857383+02:00:Thread#0:Scheduler: using testitem #12 for thread 0
+2019-07-16T17:21:04.3857383+02:00:Thread#0:Scheduler: Test #12 is scheduled for thread
+2019-07-16T17:21:04.3857383+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:21:06.3186618+02:00:Thread#0: Test #11/0 is finished on thread #0 as Succeeded within 53.9480108 seconds
+2019-07-16T17:21:06.3186618+02:00:Thread#0: Test #12/0 is started on thread #0
+2019-07-16T17:21:31.4330971+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:21:32.4304958+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.0s)
+2019-07-16T17:21:32.4304958+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:21:44.4359968+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (12.0s)
+2019-07-16T17:21:44.4359968+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:21:52.3712509+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (7.9s)
+2019-07-16T17:21:52.3722485+02:00:Thread#0:B:Then User enters username as "testuser@gm.com"
+2019-07-16T17:21:56.0459913+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersUsernameAs("testuser@gm.com") (3.7s)
+2019-07-16T17:21:56.0459913+02:00:Thread#0:B:And User enters password as "12345678"
+2019-07-16T17:21:56.8034104+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserEntersPasswordAs("12345678") (0.8s)
+2019-07-16T17:21:56.8044168+02:00:Thread#0:B:And User clicks on continue button
+2019-07-16T17:21:57.2118859+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.4s)
+2019-07-16T17:21:57.2129030+02:00:Thread#0:B:And User should selects "Bahrain" from country dropdown menu
+2019-07-16T17:21:58.5780471+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSelectsLebanonFromCountryDropdownMenu("Bahrain") (1.4s)
+2019-07-16T17:21:58.5790451+02:00:Thread#0:B:Then User should see that 2 payment methods are displayed
+2019-07-16T17:22:01.6930780+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSeeThatTwoPaymentMethodsAreDisplayed(2) (3.1s)
+2019-07-16T17:22:01.6930780+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:22:01.6930780+02:00:Thread#:Scheduler: testitem #13 from normal test queue 
+2019-07-16T17:22:01.6940783+02:00:Thread#0:Scheduler: considering testitem #13 for thread 0
+2019-07-16T17:22:01.6940783+02:00:Thread#0:TestItem#13:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:22:01.6940783+02:00:Thread#0:TestItem#13:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:22:01.6940783+02:00:Thread#0:TestItem#13:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:22:01.6940783+02:00:Thread#0:Scheduler: using testitem #13 for thread 0
+2019-07-16T17:22:01.6940783+02:00:Thread#0:Scheduler: Test #13 is scheduled for thread
+2019-07-16T17:22:01.6940783+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:22:02.9425005+02:00:Thread#0: Test #12/0 is finished on thread #0 as Succeeded within 56.6238387 seconds
+2019-07-16T17:22:02.9434999+02:00:Thread#0: Test #13/0 is started on thread #0
+2019-07-16T17:22:24.9524326+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:22:26.0596564+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.1s)
+2019-07-16T17:22:26.0606382+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:22:37.8154935+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (11.8s)
+2019-07-16T17:22:37.8164922+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:22:47.2905931+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (9.5s)
+2019-07-16T17:22:47.2915919+02:00:Thread#0:B:Then User clicks on Click here link in create your account section
+2019-07-16T17:22:53.5136386+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnClickHereLinkInCreateYourAccountSection() (6.2s)
+2019-07-16T17:22:53.5136386+02:00:Thread#0:B:And User clicks on Subscribe link in Existing User section
+2019-07-16T17:22:59.0116238+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnSubscribeLinkInExistingUserSection() (5.5s)
+2019-07-16T17:22:59.0116238+02:00:Thread#0:B:Then User should navigate to Create your account section
+2019-07-16T17:22:59.0206467+02:00:Thread#0:B:Then I should see "Create your account" on "StepName"
+2019-07-16T17:22:59.6025735+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("Create your account", "StepName") (0.6s)
+2019-07-16T17:22:59.6035749+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldNavigateToCreateYourAccountSection() (0.6s)
+2019-07-16T17:22:59.6035749+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:22:59.6035749+02:00:Thread#:Scheduler: testitem #14 from normal test queue 
+2019-07-16T17:22:59.6035749+02:00:Thread#0:Scheduler: considering testitem #14 for thread 0
+2019-07-16T17:22:59.6035749+02:00:Thread#0:TestItem#14:testItemMatchesCurrentTestThread:UnSpecific
+2019-07-16T17:22:59.6035749+02:00:Thread#0:TestItem#14:runsOnOneOtherThreadSpecific:False
+2019-07-16T17:22:59.6035749+02:00:Thread#0:TestItem#14:runsOnOneOtherThreadUnspecific:False
+2019-07-16T17:22:59.6035749+02:00:Thread#0:Scheduler: using testitem #14 for thread 0
+2019-07-16T17:22:59.6035749+02:00:Thread#0:Scheduler: Test #14 is scheduled for thread
+2019-07-16T17:22:59.6035749+02:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2019-07-16T17:23:00.8717987+02:00:Thread#0: Test #13/0 is finished on thread #0 as Succeeded within 57.9282988 seconds
+2019-07-16T17:23:00.8727968+02:00:Thread#0: Test #14/0 is started on thread #0
+2019-07-16T17:23:20.8048112+02:00:Thread#0:B:Given Jawwytv site opens successfully
+2019-07-16T17:23:23.4841944+02:00:Thread#0:T:done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (2.7s)
+2019-07-16T17:23:23.4841944+02:00:Thread#0:B:When User changes language in welcome screen
+2019-07-16T17:23:34.4208070+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (10.9s)
+2019-07-16T17:23:34.4208070+02:00:Thread#0:B:And User clicks on seven days free subscribe now button
+2019-07-16T17:23:45.3229494+02:00:Thread#0:T:done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.9s)
+2019-07-16T17:23:45.3239449+02:00:Thread#0:B:Then User clicks on Terms and Conditions link in create your account section
+2019-07-16T17:23:45.8988200+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserClicksOnTermsAndConditionsLinkInCreateYourAccountSection() (0.6s)
+2019-07-16T17:23:45.8988200+02:00:Thread#0:B:Then User should see that Terms & Conditions section is displayed
+2019-07-16T17:23:45.9058215+02:00:Thread#0:B:Then I should see "TERMS & CONDITIONS" on "FormName"
+2019-07-16T17:23:46.6029056+02:00:Thread#0:T:done: SharedSteps.ThenIShouldSee("TERMS & CONDITIONS", "FormName") (0.7s)
+2019-07-16T17:23:46.6038969+02:00:Thread#0:T:done: SampleTestingStepDefs.ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed() (0.7s)
+2019-07-16T17:23:46.6038969+02:00:Thread#0:Scheduler: get next test for thread 0
+2019-07-16T17:23:46.6038969+02:00:Thread#:Scheduler: at the end of normal test queue
+2019-07-16T17:23:46.6038969+02:00:Thread#0:Scheduler: enumerator for thread is at end
+2019-07-16T17:23:46.6038969+02:00:Thread#0:Scheduler: No more tests for thread
+2019-07-16T17:23:47.9255636+02:00:Thread#0: Test #14/0 is finished on thread #0 as Succeeded within 47.0527668 seconds
+2019-07-16T17:23:48.0115613+02:00:Appdomain Disposed
+2019-07-16T17:23:48.0185609+02:00:Trying to cancel thread
+2019-07-16T17:23:48.0185609+02:00:Thread cancelled
+2019-07-16T17:23:48.0355665+02:00:Thread#-1:Scheduler: get next test for thread -1
+2019-07-16T17:23:48.0365635+02:00:Thread#:Scheduler: at the end of normal test queue
+2019-07-16T17:23:48.0365635+02:00:Thread#-1:Scheduler: enumerator for thread is at end
+2019-07-16T17:23:48.0395615+02:00;Thread#13;Info;test run finished
+2019-07-16T17:23:48.0405624+02:00;Thread#13;Info;publishing test results
+2019-07-16T17:23:48.1105627+02:00;Thread#13;Info;test results published
+2019-07-16T17:23:48.1105627+02:00;Thread#13;Info;generating reports
+2019-07-16T17:23:48.3405597+02:00;Thread#13;Info;Starting external report generation process
+2019-07-16T17:23:50.8965592+02:00;Thread#13;Info;Successfully generated reports.
+2019-07-16T17:23:50.8995588+02:00;Thread#13;Info;Successfully generated reports
+2019-07-16T17:23:50.9125594+02:00:Total: 10
+2019-07-16T17:23:50.9155585+02:00:Succeeded: 10
+2019-07-16T17:23:50.9165588+02:00:Ignored: 0
+2019-07-16T17:23:50.9175593+02:00:Pending: 0
+2019-07-16T17:23:50.9175593+02:00:Skipped: 0
+2019-07-16T17:23:50.9185596+02:00:Failed: 0
+2019-07-16T17:23:50.9295590+02:00;VSTestExecutionThread;Info;Adding attachments to VSTest
+2019-07-16T17:23:50.9305590+02:00;VSTestExecutionThread;Info;adding Test Execution Report 'D:\Automation Framewroks\Integral\TestResults\TestResult.html'
+========== End of log file ==========

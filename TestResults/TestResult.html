@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Web.Automation.SpecFlow Test Execution Report</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript">
+        /**
+        * jQuery.fn.sortElements
+        * --------------
+        * #author James Padolsey (http://james.padolsey.com)
+        * #version 0.11
+        * #updated 18-MAR-2010
+        * #url https://raw.github.com/jamespadolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js
+        * --------------
+        * #param Function comparator:
+        *   Exactly the same behaviour as [1,2,3].sort(comparator)
+        *
+        * #param Function getSortable
+        *   A function that should return the element that is
+        *   to be sorted. The comparator will run on the
+        *   current collection, but you may want the actual
+        *   resulting sort to occur on a parent or another
+        *   associated element.
+        *
+        *   E.g. $('td').sortElements(comparator, function(){
+        *      return this.parentNode;
+        *   })
+        *
+        *   The <td>'s parent (<tr>) will be sorted instead
+        *   of the <td> itself.
+        */
+        jQuery.fn.sortElements = (function () {
+
+            var sort = [].sort;
+
+            return function (comparator, getSortable) {
+
+                getSortable = getSortable || function () { return this; };
+
+                var placements = this.map(function () {
+
+                    var sortElement = getSortable.call(this),
+                        parentNode = sortElement.parentNode,
+
+                        // Since the element itself will change position, we have
+                        // to have some way of storing it's original position in
+                        // the DOM. The easiest way is to have a 'flag' node:
+                        nextSibling = parentNode.insertBefore(
+                            document.createTextNode(''),
+                            sortElement.nextSibling
+                        );
+
+                    return function () {
+
+                        if (parentNode === this) {
+                            throw new Error(
+                                "You can't sort elements if any one is a descendant of another."
+                            );
+                        }
+
+                        // Insert before flag:
+                        parentNode.insertBefore(this, nextSibling);
+                        // Remove flag:
+                        parentNode.removeChild(nextSibling);
+
+                    };
+
+                });
+
+                return sort.call(this, comparator).each(function (i) {
+                    placements[i].call(getSortable.call(this));
+                });
+
+            };
+
+        })();
+    </script>
+    <script type="text/javascript">
+        jQuery.fn.setBarSizes = (function () {
+            return function (metricName, maxBarSize, min) {
+                var max = Math.max.apply(Math, $.makeArray($(this).map(function () { return Number($(this).attr('data-sr-' + metricName)); })));
+                var scale = 1.0;
+                while (max > 0.0 && max <= 10.0) {
+                    scale = scale * 10.0;
+                    max = max * 10.0;
+                }
+                max = (Math.ceil(max / 2) * 2) / scale;
+
+                this.each(function () {
+                    var barAnchor = $(this).find('a');
+                    var actual = $(this).attr('data-sr-' + metricName);
+                    var newHeight = Math.max(Math.round(maxBarSize * (actual - min) / (max - min)), 2);
+                    barAnchor.css({ height: newHeight });
+                });
+
+                var unit = "";
+                if (metricName.substr(metricName.length - 4, 4) === "time")
+                    unit = "s";
+
+                $('#testview .scale-min-label').each(function () {
+                    $(this).text(min.toString() + unit);
+                });
+                $('#testview .scale-max-label').each(function () {
+                    $(this).text(max.toString() + unit);
+                });
+                var mid = max / 2;
+                $('#testview .scale-mid-label').each(function () {
+                    $(this).text(mid.toString() + unit);
+                });
+            };
+        })();
+
+        function getComparer(metricName, isDesc) {
+            return function (a, b) {
+                var aNumber = Number($(a).attr('data-sr-' + metricName));
+                var bNumber = Number($(b).attr('data-sr-' + metricName));
+                var result = aNumber > bNumber ? 1 : (aNumber < bNumber ? -1 : 0);
+                if (isDesc)
+                    result = -1 * result;
+
+                if (result == 0 && metricName != "order")
+                    result = getComparer("order", false)(a, b);
+
+                return result;
+            };
+        }
+
+        var currentSort = "";
+        function doSort(allowToggleDesc) {
+            var newSort = $("input[name='barSortOrder']:checked").val();
+            if (allowToggleDesc && currentSort == newSort) {
+                $('#barSortDesc').click();
+                doSort(false);
+                return;
+            }
+            currentSort = newSort;
+            $('#testview td.testview-item').sortElements(getComparer(newSort, $('#barSortDesc').is(':checked')));
+        }
+
+
+        function doSetHeights(allowSort) {
+            var selectedMetric = $("input[name='barHeight']:checked").val();
+            $('#testview td.testview-item').setBarSizes(selectedMetric, 60, 0.0);
+
+            if (allowSort && currentSort != selectedMetric) {
+                var $radios = $("input[name='barSortOrder']");
+                $radios.filter('[value=' + selectedMetric + ']').attr('checked', true);
+                $("#barSortDesc").attr("checked", [true]);
+                doSort(false);
+            }
+        }
+
+        $(document).ready(function () {
+            $("input[name='barSortOrder']").click(function () { doSort(true); return true; });
+            $("input[name='barSortDesc']").change(function () { doSort(false); });
+            $("input[name='barHeight']").change(function () { doSetHeights(true); });
+
+            doSort(false);
+            doSetHeights(false);
+
+            $("div.scrollable").css({ 'overflow': 'auto' });
+        });
+    </script>
+    <style type="text/css">
+
+        body {
+            color: #000000;
+            font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+            line-height: 130%;
+        }
+
+        h1 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 170%;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        a.bar {
+            text-decoration: none;
+            display: block;
+            line-height: 1px;
+        }
+
+        .description {
+            font-style: italic;
+        }
+
+        .log {
+            width: 600px;
+            white-space: pre-wrap;
+            display: block;
+            margin: 0px;
+        }
+
+        .errorMessage {
+            width: 600px;
+            color: Red;
+            font-weight: bold;
+        }
+
+        .stackTrace {
+            width: 600px;
+            white-space: pre-wrap;
+            font-style: italic;
+            color: Red;
+            display: block;
+        }
+
+        table.testEvents {
+            border: solid 1px #e8eef4;
+            border-collapse: collapse;
+        }
+
+            table.testEvents td {
+                vertical-align: top;
+                padding: 5px;
+                border: solid 1px #e8eef4;
+            }
+
+            table.testEvents th {
+                padding: 6px 5px;
+                text-align: left;
+                background-color: #e8eef4;
+                border: solid 1px #e8eef4;
+            }
+
+        .comment {
+            font-style: italic;
+            font-size: smaller;
+        }
+
+        .startupBar {
+            background-color: #EEEEEE;
+            cursor: default;
+        }
+
+        .colorSucceeded {
+            background-color: #90ED7B;
+        }
+
+        .colorIgnored {
+            background-color: #FFFF85;
+        }
+
+        .colorPending {
+            background-color: #D47BED;
+        }
+
+        .colorNothingToRun {
+            background-color: #CCCCFF;
+        }
+
+        .colorSkipped {
+            background-color: #CCCCFF;
+        }
+
+        .colorInconclusive {
+            background-color: #7BEDED;
+        }
+
+        .colorCleanupFailed {
+            background-color: #FFCCCC;
+        }
+
+        .colorRandomlyFailed {
+            background-color: #EDB07B;
+        }
+
+        .colorFailed {
+            background-color: #ED5F5F;
+        }
+
+        .colorInitializationFailed {
+            background-color: #FF0000;
+        }
+
+        .colorFrameworkError {
+            background-color: #FF0000;
+        }
+
+        ul.subNodeLinks {
+            padding-left: 20px;
+            margin: 0px;
+        }
+
+            ul.subNodeLinks li {
+                list-style: none;
+            }
+
+        /* views general */
+        div.scrollable {
+            /*overflow: auto; - thsi has to be set from js, because of an IE9 bug */
+        }
+
+        div.viewbox {
+            position: relative;
+            border: 3px solid #e8eef4;
+        }
+
+            div.viewbox table {
+                border: 0px;
+            }
+
+        /* testview */
+        #testview {
+            padding-top: 23px;
+        }
+
+        table.testview-items td {
+            vertical-align: bottom;
+            padding: 0px 1px 0px 1px;
+        }
+
+        td.right-padding, td.left-padding {
+            width: 25px;
+            min-width: 25px;
+        }
+
+        table.testview-items a.bar {
+            width: 5px;
+        }
+
+        table.testview-items tr.testview-items-row {
+            height: 60px;
+        }
+
+        /* scale */
+        table.vertical-scale {
+            position: absolute;
+            top: 23px;
+            left: 0px;
+            width: 100%;
+            z-index: -100;
+        }
+
+            table.vertical-scale td, tr.horizontal-scale td {
+                font-size: 60%;
+                line-height: normal;
+            }
+
+            table.vertical-scale tr.scale-max, table.vertical-scale tr.scale-mid {
+                height: 30px;
+            }
+
+            tr.horizontal-scale, table.vertical-scale tr.scale-min {
+                height: 12px;
+            }
+
+        td.scale-max-label, td.scale-mid-label, td.scale-min-label {
+            border-top: solid 1px #E6E6E6;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        td.scale-10-label {
+            border-left: solid 1px #E6E6E6;
+            text-align: left;
+            vertical-align: bottom;
+            padding-left: 1px;
+        }
+
+        tr.scale-mid td, tr.scale-min td, tr.scale-max td {
+            border-top: solid 1px #E6E6E6;
+        }
+
+
+        /* bar-control */
+        #bar-control {
+            font-size: 60%;
+            line-height: normal;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+
+            #bar-control label {
+                font-weight: bold;
+                vertical-align: middle;
+            }
+
+            #bar-control .option {
+                vertical-align: middle;
+                text-transform: lowercase;
+            }
+
+            #bar-control input[type="checkbox"] {
+                padding: 0 2px 0 3px;
+            }
+
+            #bar-control input {
+                vertical-align: top;
+                height: 12px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            #bar-control div {
+                float: right;
+                margin: 3px 5px 3px 5px;
+            }
+
+
+        /* timeline view */
+        #timelineview {
+            padding-top: 5px;
+        }
+
+        table.timelineview a {
+            height: 20px;
+        }
+
+        table.timelineview td {
+            vertical-align: bottom;
+            padding: 0px 1px 0px 0px;
+            border: 0px;
+        }
+
+        tr.thread-items-row {
+            height: 25px;
+        }
+
+            tr.thread-items-row td {
+                vertical-align: bottom;
+            }
+
+        td.thread-label {
+            padding: 0px 6px 0px 6px;
+            text-align: right;
+            line-height: 18px;
+            vertical-align: bottom;
+        }
+
+        th.thread-label {
+            padding: 3px 6px 0px 6px;
+            line-height: 18px;
+            text-align: left;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+    <h1>Web.Automation.SpecFlow Test Execution Report</h1>
+    <ul>
+        <li>Project: Web.Automation.SpecFlow</li>
+        <li>Configuration: Web.Automation.SpecFlow</li>
+        <li>Test Assemblies: Web.Automation.SpecFlow.dll</li>
+        <li>Start Time: 7/16/2019 5:15:05 PM</li>
+        <li>Duration: 00:08:42.2664556</li>
+        <li>Test Threads: 1</li>
+    </ul>
+    <h2>Result: all tests passed</h2>
+    <table class="testEvents">
+            <tr>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+            <tr>
+            <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="10 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>10</td>
+    <td>10</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+    </tr>
+
+    </table>
+    <h2>Test Timeline Summary</h2>
+
+    <div id="timelineview" class="viewbox">
+        <div class="scrollable">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th class="thread-label" colspan="2">thread</th>
+                </tr>
+                    <tr class="thread-items-row">
+                        <td class="thread-label" title="Machine: MAHMOUD">#0</td>
+                        <td colspan="2">
+                            <table class="timelineview" cellpadding="0" cellspacing="0">
+                                <tr>
+
+                                        <td>
+        <a class="bar startupBar"
+           style="width: 3px;"
+             title="test thread startup"
+>&nbsp;</a>
+    </td>
+
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Validate back button on payment screen on entering username and password (in Verify sample tests for home and login screen Arabic)"
+             href="#t-703000162.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 3px;"
+             title="Validate that one single payment method is available for Lebanon country (in Verify sample tests for home and login screen Arabic)"
+             href="#t1763378444.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 5px;"
+             title="Validate that two payment methods are available for Bahrain country (in Verify sample tests for home and login screen Arabic)"
+             href="#t1435549239.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 6px;"
+             title="Validate user navigates back to subscribe now page (in Verify sample tests for home and login screen Arabic)"
+             href="#t978309103.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 5px;"
+             title="Validate terms and conditions page (in Verify sample tests for home and login screen Arabic)"
+             href="#t1372592330.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 9px;"
+             title="Validate back button on payment screen on entering username and password (in Verify sample tests for home and login screen)"
+             href="#t1189333770.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 6px;"
+             title="Validate that one single payment method is available for Lebanon country (in Verify sample tests for home and login screen)"
+             href="#t-102637672.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 7px;"
+             title="Validate that two payment methods are available for Bahrain country (in Verify sample tests for home and login screen)"
+             href="#t-982883165.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 7px;"
+             title="Validate user navigates back to subscribe now page (in Verify sample tests for home and login screen)"
+             href="#t-1430973061.0"
+>&nbsp;</a>
+    </td>
+    <td>
+        <a class="bar colorSucceeded"
+           style="width: 5px;"
+             title="Validate terms and conditions page (in Verify sample tests for home and login screen)"
+             href="#t-1054162338.0"
+>&nbsp;</a>
+    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                <tr class="horizontal-scale">
+                    <td>&nbsp;</td>
+                        <td class="scale-10-label" style="width: 70px;min-width: 70px;">0s</td>
+                    <td class="scale-10-label">522s</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h2>Test Result View</h2>
+    <div id="testview" class="viewbox">
+        <div id="bar-control">
+            <div id="bar-control-sort">
+                <label>sort by:</label>
+                <span class="option"><input type="radio" name="barSortOrder" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="acttime" />Act Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="order" />Execution</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="rescode" checked="checked" />Result</span>
+                <span class="option"><input type="checkbox" name="barSortDesc" id="barSortDesc" checked="checked" />desc</span>
+            </div>
+            <div id="bar-control-heights">
+                <label>heights:</label>
+                <span class="option"><input type="radio" checked="checked" name="barHeight" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barHeight" value="acttime" />Act Time</span>
+                
+            </div>
+        </div>
+        <table class="vertical-scale" cellpadding="0" cellspacing="0">
+            <tr class="scale-max">
+                <td class="left-padding scale-max-label">&nbsp;</td>
+                <td colspan="10">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-mid">
+                <td class="left-padding scale-mid-label">&nbsp;</td>
+                <td colspan="10">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-min">
+                <td class="left-padding scale-min-label">&nbsp;</td>
+                <td colspan="10">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="scrollable">
+            <table class="testview-items" cellpadding="0" cellspacing="0">
+                <tr class="testview-items-row">
+                    <td class="left-padding">&nbsp;</td>
+    <td class="testview-item"
+        data-sr-exectime="43.7022532" data-sr-rescode="110" data-sr-order="0" data-sr-acttime="11.282">
+        <a class="bar colorSucceeded"
+           style="height: 34px;"
+           title="Validate back button on payment screen on entering username and password (in Verify sample tests for home and login screen Arabic)"
+           href="#t-703000162.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="46.3761871" data-sr-rescode="110" data-sr-order="1" data-sr-acttime="13.67">
+        <a class="bar colorSucceeded"
+           style="height: 36px;"
+           title="Validate that one single payment method is available for Lebanon country (in Verify sample tests for home and login screen Arabic)"
+           href="#t1763378444.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="42.4062409" data-sr-rescode="110" data-sr-order="2" data-sr-acttime="9.612">
+        <a class="bar colorSucceeded"
+           style="height: 33px;"
+           title="Validate that two payment methods are available for Bahrain country (in Verify sample tests for home and login screen Arabic)"
+           href="#t1435549239.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="51.9924858" data-sr-rescode="110" data-sr-order="3" data-sr-acttime="10.393">
+        <a class="bar colorSucceeded"
+           style="height: 40px;"
+           title="Validate user navigates back to subscribe now page (in Verify sample tests for home and login screen Arabic)"
+           href="#t978309103.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="43.2717844" data-sr-rescode="110" data-sr-order="4" data-sr-acttime="11.162">
+        <a class="bar colorSucceeded"
+           style="height: 33px;"
+           title="Validate terms and conditions page (in Verify sample tests for home and login screen Arabic)"
+           href="#t1372592330.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="77.6425933" data-sr-rescode="110" data-sr-order="5" data-sr-acttime="35.991">
+        <a class="bar colorSucceeded"
+           style="height: 60px;"
+           title="Validate back button on payment screen on entering username and password (in Verify sample tests for home and login screen)"
+           href="#t1189333770.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="53.9480108" data-sr-rescode="110" data-sr-order="6" data-sr-acttime="19.415">
+        <a class="bar colorSucceeded"
+           style="height: 42px;"
+           title="Validate that one single payment method is available for Lebanon country (in Verify sample tests for home and login screen)"
+           href="#t-102637672.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="56.6238387" data-sr-rescode="110" data-sr-order="7" data-sr-acttime="19.942">
+        <a class="bar colorSucceeded"
+           style="height: 44px;"
+           title="Validate that two payment methods are available for Bahrain country (in Verify sample tests for home and login screen)"
+           href="#t-982883165.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="57.9282988" data-sr-rescode="110" data-sr-order="8" data-sr-acttime="21.231">
+        <a class="bar colorSucceeded"
+           style="height: 45px;"
+           title="Validate user navigates back to subscribe now page (in Verify sample tests for home and login screen)"
+           href="#t-1430973061.0">&nbsp;</a>
+    </td>
+    <td class="testview-item"
+        data-sr-exectime="47.0527668" data-sr-rescode="110" data-sr-order="9" data-sr-acttime="21.839">
+        <a class="bar colorSucceeded"
+           style="height: 36px;"
+           title="Validate terms and conditions page (in Verify sample tests for home and login screen)"
+           href="#t-1054162338.0">&nbsp;</a>
+    </td>
+                    <td class="right-padding">&nbsp;</td>
+                </tr>
+                <tr class="horizontal-scale">
+                    <td class="left-padding">&nbsp;</td>
+                    <td colspan="10">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <h2>Feature Summary</h2>
+    <table class="testEvents">
+            <tr>
+            <th>Feature</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+    <tr>
+            <td><a href="#f-507665203">Verify sample tests for home and login screen (target: Chrome)</a></td>
+            <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="5 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>5</td>
+    <td>5</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+    </tr>
+    <tr>
+            <td><a href="#f1900510809">Verify sample tests for home and login screen Arabic (target: Chrome)</a></td>
+            <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="5 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>5</td>
+    <td>5</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+    </tr>
+    </table>
+    <a name="error_summary" />
+    <h2>Error Summary</h2>
+    <table class="testEvents">
+            <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+    </table>
+    <h2>Scenario Summary</h2>
+        <a name="f-507665203" />
+        <h3>Feature: Verify sample tests for home and login screen (target: Chrome)</h3>
+        <table class="testEvents">
+                <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+                <tr>
+                    <td>
+                                <a href="#t1189333770.0">Scenario: Validate back button on payment screen on entering username and password</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t-102637672.0">Scenario: Validate that one single payment method is available for Lebanon country</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t-982883165.0">Scenario: Validate that two payment methods are available for Bahrain country</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t-1430973061.0">Scenario: Validate user navigates back to subscribe now page</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t-1054162338.0">Scenario: Validate terms and conditions page</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+        </table>
+        <a name="f1900510809" />
+        <h3>Feature: Verify sample tests for home and login screen Arabic (target: Chrome)</h3>
+        <table class="testEvents">
+                <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+                <tr>
+                    <td>
+                                <a href="#t-703000162.0">Scenario: Validate back button on payment screen on entering username and password</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t1763378444.0">Scenario: Validate that one single payment method is available for Lebanon country</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t1435549239.0">Scenario: Validate that two payment methods are available for Bahrain country</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t978309103.0">Scenario: Validate user navigates back to subscribe now page</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td>
+                                <a href="#t1372592330.0">Scenario: Validate terms and conditions page</a>
+
+                    </td>
+                        <td>
+            100%
+    </td>
+    <td>
+        <table class="timelineview" cellpadding="0" cellspacing="0">
+            <tr>
+                    <td>
+                        <a class="bar colorSucceeded"
+                           style="width: 199px;"
+                           title="1 succeeded"
+                            />
+                    </td>
+            </tr>
+        </table>
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+        </table>
+    <h2>Execution Details</h2>
+        <a name="t-703000162.0" />
+        <h3>Scenario: Validate back button on payment screen on entering username and password (in Web.Automation.SpecFlow, Verify sample tests for home and login screen Arabic)</h3>
+            <div class="description">
+                tags: Chrome, AR
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:15:06 PM</li>
+            <li>Execution time (sec): 43.7022532</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log"></pre>
+                    </td>
+                    <td>
+                        <!-- [Initialization: Feature - Verify sample tests for home and login screen Arabic] -->
+                        <pre class="log">-&gt; Loading plugin D:\Automation Framewroks\Integral\Web.Automation.SpecFlow\bin\Debug\SpecRun.Runtime.SpecFlowPlugin.dll
+-&gt; Using default config</pre>
+                    </td>
+                    <td>Succeeded in 0.626s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (4.2s)</pre>
+                    </td>
+                    <td>Succeeded in 25.328s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.328s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (11.0s)</pre>
+                    </td>
+                    <td>Succeeded in 10.954s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (1.1s)</pre>
+                    </td>
+                    <td>Succeeded in 1.072s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.689s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.738s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see back button displayed on payment screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 1.345s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;قم بإعداد طريقة الدفع الخاصة بك&quot; on &quot;StepName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;قم بإعداد طريقة ا...&quot;, &quot;StepName&quot;) (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.77s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;رجوع&quot; on &quot;BackButton&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;رجوع&quot;, &quot;BackButton&quot;) (0.4s)
+done: SampleTestingStepDefsAR.ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen() (2.5s)</pre>
+                    </td>
+                    <td>Succeeded in 0.434s</td>
+                </tr>
+        </table>
+        <a name="t1763378444.0" />
+        <h3>Scenario: Validate that one single payment method is available for Lebanon country (in Web.Automation.SpecFlow, Verify sample tests for home and login screen Arabic)</h3>
+            <div class="description">
+                tags: Chrome, AR
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:15:50 PM</li>
+            <li>Execution time (sec): 46.3761871</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.3s)</pre>
+                    </td>
+                    <td>Succeeded in 23.809s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.271s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (13.4s)</pre>
+                    </td>
+                    <td>Succeeded in 13.398s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (1.2s)</pre>
+                    </td>
+                    <td>Succeeded in 1.226s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.655s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.5s)</pre>
+                    </td>
+                    <td>Succeeded in 0.535s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User should selects &quot;Lebanon&quot; from country dropdown menu</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.ThenUserShouldSelectsLebanonFromCountryDropdownMenu(&quot;Lebanon&quot;) (2.0s)</pre>
+                    </td>
+                    <td>Succeeded in 2.011s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that only &quot;Credit Card&quot; payment method is displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed(&quot;Credit Card&quot;) (3.2s)</pre>
+                    </td>
+                    <td>Succeeded in 3.157s</td>
+                </tr>
+        </table>
+        <a name="t1435549239.0" />
+        <h3>Scenario: Validate that two payment methods are available for Bahrain country (in Web.Automation.SpecFlow, Verify sample tests for home and login screen Arabic)</h3>
+            <div class="description">
+                tags: Chrome, AR
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:16:37 PM</li>
+            <li>Execution time (sec): 42.4062409</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (2.6s)</pre>
+                    </td>
+                    <td>Succeeded in 23.195s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.255s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (9.4s)</pre>
+                    </td>
+                    <td>Succeeded in 9.357s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (2.1s)</pre>
+                    </td>
+                    <td>Succeeded in 2.092s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.721s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (1.0s)</pre>
+                    </td>
+                    <td>Succeeded in 1.039s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User should selects &quot;Bahrain&quot; from country dropdown menu</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.ThenUserShouldSelectsLebanonFromCountryDropdownMenu(&quot;Bahrain&quot;) (1.3s)</pre>
+                    </td>
+                    <td>Succeeded in 1.29s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that 2 payment methods are displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserShouldSeeThatTwoPaymentMethodsAreDisplayed(2) (3.1s)</pre>
+                    </td>
+                    <td>Succeeded in 3.138s</td>
+                </tr>
+        </table>
+        <a name="t978309103.0" />
+        <h3>Scenario: Validate user navigates back to subscribe now page (in Web.Automation.SpecFlow, Verify sample tests for home and login screen Arabic)</h3>
+            <div class="description">
+                tags: Chrome, AR
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:17:19 PM</li>
+            <li>Execution time (sec): 51.9924858</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.7s)</pre>
+                    </td>
+                    <td>Succeeded in 25.308s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.296s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.1s)</pre>
+                    </td>
+                    <td>Succeeded in 10.097s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User clicks on Click here link in create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnClickHereLinkInCreateYourAccountSection() (7.8s)</pre>
+                    </td>
+                    <td>Succeeded in 7.808s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on Subscribe link in Existing User section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnSubscribeLinkInExistingUserSection() (3.5s)</pre>
+                    </td>
+                    <td>Succeeded in 3.491s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should navigate to Create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 0.023s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;أنشئ حسابك&quot; on &quot;StepName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;أنشئ حسابك&quot;, &quot;StepName&quot;) (2.4s)
+done: SampleTestingStepDefsAR.ThenUserShouldNavigateToCreateYourAccountSection() (2.4s)</pre>
+                    </td>
+                    <td>Succeeded in 2.399s</td>
+                </tr>
+        </table>
+        <a name="t1372592330.0" />
+        <h3>Scenario: Validate terms and conditions page (in Web.Automation.SpecFlow, Verify sample tests for home and login screen Arabic)</h3>
+            <div class="description">
+                tags: Chrome, AR
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:18:11 PM</li>
+            <li>Execution time (sec): 43.2717844</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.1s)</pre>
+                    </td>
+                    <td>Succeeded in 29.276s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefsAR.WhenUserChangesLanguageInWelcomeScreen() (0.5s)</pre>
+                    </td>
+                    <td>Succeeded in 0.479s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.7s)</pre>
+                    </td>
+                    <td>Succeeded in 10.683s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User clicks on Terms and Conditions link in create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnTermsAndConditionsLinkInCreateYourAccountSection() (0.8s)</pre>
+                    </td>
+                    <td>Succeeded in 0.842s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that Terms &amp; Conditions section is displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 0.013s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;الشروط والأحكام&quot; on &quot;FormName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;الشروط والأحكام&quot;, &quot;FormName&quot;) (0.6s)
+done: SampleTestingStepDefsAR.ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed() (0.6s)</pre>
+                    </td>
+                    <td>Succeeded in 0.607s</td>
+                </tr>
+        </table>
+        <a name="t1189333770.0" />
+        <h3>Scenario: Validate back button on payment screen on entering username and password (in Web.Automation.SpecFlow, Verify sample tests for home and login screen)</h3>
+            <div class="description">
+                tags: Chrome, EN
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:18:54 PM</li>
+            <li>Execution time (sec): 77.6425933</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.2s)</pre>
+                    </td>
+                    <td>Succeeded in 35.306s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (29.7s)</pre>
+                    </td>
+                    <td>Succeeded in 29.746s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (6.2s)</pre>
+                    </td>
+                    <td>Succeeded in 6.246s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (2.8s)</pre>
+                    </td>
+                    <td>Succeeded in 2.774s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.73s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.315s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see back button displayed on payment screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 0.006s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;Set up your payment method&quot; on &quot;StepName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;Set up your payme...&quot;, &quot;StepName&quot;) (0.8s)</pre>
+                    </td>
+                    <td>Succeeded in 0.825s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;BACK&quot; on &quot;BackButton&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate back button on payment screen on entering username and password] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;BACK&quot;, &quot;BackButton&quot;) (0.4s)
+done: SampleTestingStepDefs.ThenUserShouldSeeBackButtonDisplayedOnPaymentScreen() (1.3s)</pre>
+                    </td>
+                    <td>Succeeded in 0.424s</td>
+                </tr>
+        </table>
+        <a name="t-102637672.0" />
+        <h3>Scenario: Validate that one single payment method is available for Lebanon country (in Web.Automation.SpecFlow, Verify sample tests for home and login screen)</h3>
+            <div class="description">
+                tags: Chrome, EN
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:20:12 PM</li>
+            <li>Execution time (sec): 53.9480108</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.5s)</pre>
+                    </td>
+                    <td>Succeeded in 23.305s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (9.2s)</pre>
+                    </td>
+                    <td>Succeeded in 9.153s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.3s)</pre>
+                    </td>
+                    <td>Succeeded in 10.263s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (1.1s)</pre>
+                    </td>
+                    <td>Succeeded in 1.082s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (1.1s)</pre>
+                    </td>
+                    <td>Succeeded in 1.067s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.664s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User should selects &quot;Lebanon&quot; from country dropdown menu</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserShouldSelectsLebanonFromCountryDropdownMenu(&quot;Lebanon&quot;) (3.2s)</pre>
+                    </td>
+                    <td>Succeeded in 3.21s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that only &quot;Credit Card&quot; payment method is displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that one single payment method is available for Lebanon country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserShouldSeeThatOnlyCreditCardPaymentMethodIsDisplayed(&quot;Credit Card&quot;) (3.3s)</pre>
+                    </td>
+                    <td>Succeeded in 3.271s</td>
+                </tr>
+        </table>
+        <a name="t-982883165.0" />
+        <h3>Scenario: Validate that two payment methods are available for Bahrain country (in Web.Automation.SpecFlow, Verify sample tests for home and login screen)</h3>
+            <div class="description">
+                tags: Chrome, EN
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:21:06 PM</li>
+            <li>Execution time (sec): 56.6238387</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.0s)</pre>
+                    </td>
+                    <td>Succeeded in 26.112s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (12.0s)</pre>
+                    </td>
+                    <td>Succeeded in 12.006s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (7.9s)</pre>
+                    </td>
+                    <td>Succeeded in 7.936s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User enters username as &quot;testuser@gm.com&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersUsernameAs(&quot;testuser@gm.com&quot;) (3.7s)</pre>
+                    </td>
+                    <td>Succeeded in 3.674s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User enters password as &quot;12345678&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserEntersPasswordAs(&quot;12345678&quot;) (0.8s)</pre>
+                    </td>
+                    <td>Succeeded in 0.758s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on continue button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnContinueButton() (0.4s)</pre>
+                    </td>
+                    <td>Succeeded in 0.407s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User should selects &quot;Bahrain&quot; from country dropdown menu</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserShouldSelectsLebanonFromCountryDropdownMenu(&quot;Bahrain&quot;) (1.4s)</pre>
+                    </td>
+                    <td>Succeeded in 1.367s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that 2 payment methods are displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate that two payment methods are available for Bahrain country] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserShouldSeeThatTwoPaymentMethodsAreDisplayed(2) (3.1s)</pre>
+                    </td>
+                    <td>Succeeded in 3.114s</td>
+                </tr>
+        </table>
+        <a name="t-1430973061.0" />
+        <h3>Scenario: Validate user navigates back to subscribe now page (in Web.Automation.SpecFlow, Verify sample tests for home and login screen)</h3>
+            <div class="description">
+                tags: Chrome, EN
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:22:02 PM</li>
+            <li>Execution time (sec): 57.9282988</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (1.1s)</pre>
+                    </td>
+                    <td>Succeeded in 23.116s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (11.8s)</pre>
+                    </td>
+                    <td>Succeeded in 11.757s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (9.5s)</pre>
+                    </td>
+                    <td>Succeeded in 9.474s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User clicks on Click here link in create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnClickHereLinkInCreateYourAccountSection() (6.2s)</pre>
+                    </td>
+                    <td>Succeeded in 6.223s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on Subscribe link in Existing User section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnSubscribeLinkInExistingUserSection() (5.5s)</pre>
+                    </td>
+                    <td>Succeeded in 5.498s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should navigate to Create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 0.007s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;Create your account&quot; on &quot;StepName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate user navigates back to subscribe now page] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;Create your account&quot;, &quot;StepName&quot;) (0.6s)
+done: SampleTestingStepDefs.ThenUserShouldNavigateToCreateYourAccountSection() (0.6s)</pre>
+                    </td>
+                    <td>Succeeded in 0.585s</td>
+                </tr>
+        </table>
+        <a name="t-1054162338.0" />
+        <h3>Scenario: Validate terms and conditions page (in Web.Automation.SpecFlow, Verify sample tests for home and login screen)</h3>
+            <div class="description">
+                tags: Chrome, EN
+            </div>
+        <ul>
+            <li>Status: Succeeded</li>
+            <li>Start time: 7/16/2019 5:23:00 PM</li>
+            <li>Execution time (sec): 47.0527668</li>
+            <li>Thread: #0</li>
+        </ul>
+        <table class="testEvents">
+            <tr>
+                <th>Steps</th>
+                <th>Trace</th>
+                <th>Result</th>
+            </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Given Jawwytv site opens successfully</pre>
+                    </td>
+                    <td>
+                        <!-- [TestArrange: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.GivenJawwytvSiteOpensSuccessfully() (2.7s)</pre>
+                    </td>
+                    <td>Succeeded in 22.611s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">When User changes language in welcome screen</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserChangesLanguageInWelcomeScreen() (10.9s)</pre>
+                    </td>
+                    <td>Succeeded in 10.937s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">And User clicks on seven days free subscribe now button</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAct: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.WhenUserClicksOnSevenDaysFreeSubscribeNowButton() (10.9s)</pre>
+                    </td>
+                    <td>Succeeded in 10.902s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User clicks on Terms and Conditions link in create your account section</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SampleTestingStepDefs.ThenUserClicksOnTermsAndConditionsLinkInCreateYourAccountSection() (0.6s)</pre>
+                    </td>
+                    <td>Succeeded in 0.576s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then User should see that Terms &amp; Conditions section is displayed</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log"></pre>
+                    </td>
+                    <td>Succeeded in 0.006s</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="log">Then I should see &quot;TERMS &amp; CONDITIONS&quot; on &quot;FormName&quot;</pre>
+                    </td>
+                    <td>
+                        <!-- [TestAssert: Scenario - Validate terms and conditions page] -->
+                        <pre class="log">done: SharedSteps.ThenIShouldSee(&quot;TERMS &amp; CONDITIONS&quot;, &quot;FormName&quot;) (0.7s)
+done: SampleTestingStepDefs.ThenUserShouldSeeThatTermsConditionsSectionIsDisplayed() (0.7s)</pre>
+                    </td>
+                    <td>Succeeded in 0.699s</td>
+                </tr>
+        </table>
+</body>
+</html>
+</a><div style="position: absolute; top:0px; right:10px; z-index: 1000; text-align: right; font-size: small; color: #FF5555">
+Generated by an evaluation version of SpecRun.<br />
+This version can be used for evaluation purposes only.<br />
+For obtaining a registered license please visit <a href="http://www.specflow.org/plus">http://www.specflow.org/plus</a>.
+</div>
