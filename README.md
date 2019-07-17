@@ -27,9 +27,9 @@
 
 
 ## Instructions
-1.<strong>Visual studio installed</strong>
-2.<strong> Clone the project to your machine</strong>
-3.<strong> Make sure SpecFlow installed in Visual Studio: Under Tools > Extenstions and Update</strong>
+1. <strong>Visual studio installed</strong>
+2. <strong> Clone the project to your machine</strong>
+3. <strong> Make sure SpecFlow installed in Visual Studio: Under Tools > Extenstions and Update</strong>
 <img src="images/Extensions.png">
 <img src="images/specflow.png">
 4. <strong>Build the Solution</strong>
@@ -39,7 +39,7 @@
 6. <strong>Make Sure you downloded the Chrome version `75.0.3770.100` </strong>
 7. <strong>Make sure you were downloded Microsoft Expression Encoder 4 from <a href="https://www.microsoft.com/en-sa/download/details.aspx?id=18974">here</a>
  </strong>
- 8.<strong>Make Sure to run the recorded videos from selenium by VLC application</strong>
+ 8. <strong>Make Sure to run the recorded videos from selenium by VLC application</strong>
 
 ## Project Structure 
 1. <strong>BLL Project: Contains The selenium logic</strong>
