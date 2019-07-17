@@ -4,7 +4,7 @@
     <a href="https://specflow.org/" alt="SpecFlow">
         <img alt="Nuget" src="https://img.shields.io/nuget/dt/SpecFlow.svg?label=SpecFlow&logo=SpecFlow"></a>   
   <a href="https://www.seleniumhq.org/.org" alt="Selenium">
-        <img alt="Nuget" src="https://img.shields.io/nuget/v/selenium.webdriver.svg"></a>
+        <img alt="Nuget" src="https://img.shields.io/nuget/dt/selenium.webdriver.svg?label=Selenium"></a>
   <a href="https://fluentAssertions.com" alt="FluentAssertions">
         <img alt="Nuget" src="https://img.shields.io/nuget/dt/FluentAssertions.svg?label=FluentAssertions&logo=FluentAssertions"></a>
   <a href="https://nunit.org" alt="NUnit">
