@@ -18,9 +18,9 @@
     
   <p align="center">
     <br />
-    <a href="#instructions"><strong>Read Instructions.</strong></a>
-    <a href="#project-structure"><strong>Project Structure.</strong></a>
-    <a href="https://github.com/mahmoudazaid/Integral/tree/master/TestResults"><strong>Test Results.</strong></a>    
+    <a href="#instructions"><strong>| Read Instructions |</strong></a>
+    <a href="#project-structure"><strong> Project Structure |</strong></a>
+    <a href="https://github.com/mahmoudazaid/Integral/tree/master/TestResults"><strong>Test Results |</strong></a>    
     <br />    
   </p>
 </p>
