@@ -42,7 +42,7 @@
  <h4>8. Make Sure to run the recorded videos from selenium by VLC application</h4>
 
 ## Project Structure 
-1. <strong>BLL Solution: Contains The selenium logic</strong>
+1. <strong>BLL Project: Contains The selenium logic</strong>
     * <strong>Browser:</strong> Contains driver class to open the browser
     * <strong>Extensions:</strong> Contains the classes that responsoble for actions
         * DriverExtensions.cs: responsible for handel browser actions like scrolling and alerts
@@ -60,9 +60,9 @@
         * LoctorTypes.cs: contains all locator types.
         * WebElement.cs: contains the JSON elements to use it in deserlization
    
-2. <strong>Web.Automation.SpecFlow: Contains the all features file and step defentions</strong>
-    * Features: Contains all BDD test cases
-    * StepDefinitions: Contains all code behind test cases
-    * ObjectRepository Contains the JSON files that contain the elements locators 
-    * Reports: Contains the report template
-    * Hooks.cs: The class responsible for setup and teardown 
+2. <strong>Web.Automation.SpecFlow Project: Contains the all features file and step defentions</strong>
+    * <strong>Features:</strong> Contains all BDD test cases
+    * <strong>StepDefinitions:</strong> Contains all code behind test cases
+    * <strong>ObjectRepository:</strong> Contains the JSON files that contain the elements locators 
+    * <strong>Reports:</strong> Contains the report template
+    * <strong>Hooks.cs:</strong> The class responsible for setup and teardown 
