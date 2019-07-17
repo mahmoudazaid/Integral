@@ -19,7 +19,7 @@ namespace Web.Automation.SpecFlow.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [TechTalk.SpecRun.FeatureAttribute("Verify sample tests for home and login screen Arabic", new string[] {
             "Chrome",
-            "AR"}, SourceFile="Features\\SampleTestingAR.feature", SourceLine=1)]
+            "AR"}, SourceFile="Features\\SampleTestingAR.feature", SourceLine=3)]
     public partial class VerifySampleTestsForHomeAndLoginScreenArabicFeature
     {
         
@@ -72,114 +72,124 @@ namespace Web.Automation.SpecFlow.Features
         
         public virtual void FeatureBackground()
         {
-#line 4
-#line 5
-testRunner.Given("Jawwytv site opens successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 6
-testRunner.When("User changes language in welcome screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
+testRunner.Given("Jawwytv site opens successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 8
+testRunner.When("User changes language in welcome screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
 testRunner.And("User clicks on seven days free subscribe now button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate back button on payment screen on entering username and password", SourceLine=8)]
+        [TechTalk.SpecRun.ScenarioAttribute("Validate back button on payment screen on entering username and password", new string[] {
+                "Toptest"}, SourceLine=11)]
         public virtual void ValidateBackButtonOnPaymentScreenOnEnteringUsernameAndPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate back button on payment screen on entering username and password", null, ((string[])(null)));
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate back button on payment screen on entering username and password", null, new string[] {
+                        "Toptest"});
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
-#line 10
-    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
-    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
-    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
+    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
     testRunner.Then("User should see back button displayed on payment screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate that one single payment method is available for Lebanon country", SourceLine=14)]
+        [TechTalk.SpecRun.ScenarioAttribute("Validate that one single payment method is available for Lebanon country", new string[] {
+                "Toptest"}, SourceLine=17)]
         public virtual void ValidateThatOneSinglePaymentMethodIsAvailableForLebanonCountry()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate that one single payment method is available for Lebanon country", null, ((string[])(null)));
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate that one single payment method is available for Lebanon country", null, new string[] {
+                        "Toptest"});
+#line 18
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
-#line 16
-    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 17
-    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
-    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
-    testRunner.And("User should selects \"Lebanon\" from country dropdown menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
+    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
+    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+    testRunner.And("User should selects \"Lebanon\" from country dropdown menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
     testRunner.Then("User should see that only \"Credit Card\" payment method is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate that two payment methods are available for Bahrain country", SourceLine=21)]
+        [TechTalk.SpecRun.ScenarioAttribute("Validate that two payment methods are available for Bahrain country", new string[] {
+                "Bottomtest"}, SourceLine=25)]
         public virtual void ValidateThatTwoPaymentMethodsAreAvailableForBahrainCountry()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate that two payment methods are available for Bahrain country", null, ((string[])(null)));
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate that two payment methods are available for Bahrain country", null, new string[] {
+                        "Bottomtest"});
+#line 26
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
-#line 23
-    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 24
-    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
-    testRunner.And("User should selects \"Bahrain\" from country dropdown menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
+    testRunner.Then("User enters username as \"testuser@gm.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 28
+    testRunner.And("User enters password as \"12345678\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+    testRunner.And("User clicks on continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+    testRunner.And("User should selects \"Bahrain\" from country dropdown menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
     testRunner.Then("User should see that 2 payment methods are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate user navigates back to subscribe now page", SourceLine=28)]
+        [TechTalk.SpecRun.ScenarioAttribute("Validate user navigates back to subscribe now page", new string[] {
+                "Bottomtest"}, SourceLine=32)]
         public virtual void ValidateUserNavigatesBackToSubscribeNowPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate user navigates back to subscribe now page", null, ((string[])(null)));
-#line 29
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate user navigates back to subscribe now page", null, new string[] {
+                        "Bottomtest"});
+#line 33
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
-#line 30
+#line 34
     testRunner.Then("User clicks on Click here link in create your account section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
+#line 35
     testRunner.And("User clicks on Subscribe link in Existing User section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 36
     testRunner.Then("User should navigate to Create your account section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate terms and conditions page", SourceLine=33)]
+        [TechTalk.SpecRun.ScenarioAttribute("Validate terms and conditions page", new string[] {
+                "Bottomtest"}, SourceLine=37)]
         public virtual void ValidateTermsAndConditionsPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate terms and conditions page", null, ((string[])(null)));
-#line 34
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate terms and conditions page", null, new string[] {
+                        "Bottomtest"});
+#line 38
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
-#line 35
+#line 39
     testRunner.Then("User clicks on Terms and Conditions link in create your account section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 36
+#line 40
     testRunner.Then("User should see that Terms & Conditions section is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
