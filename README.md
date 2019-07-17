@@ -42,14 +42,14 @@
  <h4>8. Make Sure to run the recorded videos from selenium by VLC application</h4>
 
 ## Structure 
-<h2>1. BLL Solution: Contains The selenium logic</h2>
- * Browser: Contains driver class to open the browser
- * Extensions: Contains the classes that responsoble for actions
-    * DriverExtensions.cs: responsible for handel browser actions like scrolling and alerts
-    * ElementExtensions.cs: responsible for element inspections and waiting
-    * JSExtensions.cs: contians method that take a java script and runnig it
-    * SEActions.cs: resonsible for selenium actions such as (Click, SendKeys)
-   * Utlities: contains helper classes
+<h4>1. BLL Solution: Contains The selenium logic</h4>
+* Browser: Contains driver class to open the browser
+    * Extensions: Contains the classes that responsoble for actions
+        * DriverExtensions.cs: responsible for handel browser actions like scrolling and alerts
+        * ElementExtensions.cs: responsible for element inspections and waiting
+        * JSExtensions.cs: contians method that take a java script and runnig it
+        * SEActions.cs: resonsible for selenium actions such as (Click, SendKeys)
+    * Utlities: contains helper classes
     * FileManager.cs: responsible for acting with system directories like (Check file downoaded, Delete file from the system, create directory)
     * ScreenShot.cs: responsible for taking screenshot from the system
     * VideoRecorder.cs: responsible for recording video
@@ -60,7 +60,7 @@
     * LoctorTypes.cs: contains all locator types.
     * WebElement.cs: contains the JSON elements to use it in deserlization
    
-<h2>2. Web.Automation.SpecFlow: Contains the all features file and step defentions</h2>
+<h4>2. Web.Automation.SpecFlow: Contains the all features file and step defentions</h4>
     * Features: Contains all BDD test cases
     * StepDefinitions: Contains all code behind test cases
     * ObjectRepository Contains the JSON files that contain the elements locators 
